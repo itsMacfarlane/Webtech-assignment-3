@@ -1,185 +1,280 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>HTML - Structure</title> 
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-	    <meta name="description" content="How is HTML structured">
-	    <meta name="keywords" content="HTML, CSS, W3C, Structure">
-		<link rel="stylesheet" href="css/hertog.css?v=2.4">
-		<link rel="icon" href="resources/favicon.ico" type="image/x-icon" />
-	</head>
-	<body class="structure-body body">
-		<header class="body__header">
-			<img class="header__image" src="https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png" alt="HTML logo">
-			<p class="header__title">HTML</p>
-		</header>
+    <head>
+        <title>HTML - Structure</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="How is HTML structured" />
+        <meta name="keywords" content="HTML, CSS, W3C, Structure" />
+        <link rel="stylesheet" href="css/hertog.css?v=2.4" />
+        <link rel="icon" href="resources/favicon.ico" type="image/x-icon" />
+    </head>
+    <body class="structure-body body">
+        <header class="body__header">
+            <img
+                class="header__image"
+                src="https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png"
+                alt="HTML logo"
+            />
+            <p class="header__title">HTML</p>
+        </header>
 
-		<nav class="body__navigation">
-			<ul class="navigation__list">
-				<li>
-					<a href="index.html">Home</a>
-				</li>
-				<li>
-					<a href="history.html">History</a>
-				</li>
-				<li>
-					<a href="">Structure</a>
-				</li>
-				<li>
-					<a href="assessment.html">Assessment</a>
-				</li>
-				<li>
-					<a href="faq.html">FAQ</a>
-				</li>
-				<li>
-					<a href="about.html">About</a>
-				</li>
-			</ul>
-		</nav>
+        <nav class="body__navigation">
+            <ul class="navigation__list">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="history.html">History</a>
+                </li>
+                <li>
+                    <a href="">Structure</a>
+                </li>
+                <li>
+                    <a href="assessment.html">Assessment</a>
+                </li>
+                <li>
+                    <a href="faq.html">FAQ</a>
+                </li>
+                <li>
+                    <a href="login.html">Login</a>
+                </li>
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+            </ul>
+        </nav>
 
-		<article class="structure-body__intro-article body__article">
-			<h1 class="article__title">Structure of a HTML document</h1>
-			<p>Underneath a general overview of the structure of a HTML document is shown. By clicking on the &lt;tags> more information will be provided.</p>
-		</article>
+        <article class="structure-body__intro-article body__article">
+            <h1 class="article__title">Structure of a HTML document</h1>
+            <p>
+                Underneath a general overview of the structure of a HTML
+                document is shown. By clicking on the &lt;tags> more information
+                will be provided.
+            </p>
+        </article>
 
-		<div class="structure-body__scheme">
-			<div class="box"><a href="#html">&lt;html&gt;</a>
-				<div class="box"><a href="#head">&lt;head&gt;</a>
-					<div class="box"><a href="#title">&lt;title&gt;</a></div>
-					<div class="box"><a href="#meta">&lt;meta&gt;</a></div>
-					<div class="box"><a href="#link">&lt;link&gt;</a></div>
-				</div>
-				<div class="box"><a href="#body">&lt;body&gt;</a>
-					<div class="box"><a href="#header">&lt;header&gt;</a></div>
-					<div class="box"><a href="#nav">&lt;nav&gt;</a></div>
-					<div class="boxAlt">
-						<div class="schemeArticle boxInner"><a href="#article">&lt;article&gt;</a>
-							<div class="box"><a href="#section">&lt;section&gt;</a></div>
-						</div>
-						<div class="schemeAside boxInner"><a href="#aside">&lt;aside&gt;</a>
-							<div class="box"><a href="#p">&lt;p&gt;</a></div>
-						</div>
-					</div>
-					<div class="box"><a href="#footer">&lt;footer&gt;</a></div>
-				</div>
-			</div>
-		</div>
+        <div class="structure-body__scheme">
+            <div class="box">
+                <a href="#html">&lt;html&gt;</a>
+                <div class="box">
+                    <a href="#head">&lt;head&gt;</a>
+                    <div class="box"><a href="#title">&lt;title&gt;</a></div>
+                    <div class="box"><a href="#meta">&lt;meta&gt;</a></div>
+                    <div class="box"><a href="#link">&lt;link&gt;</a></div>
+                </div>
+                <div class="box">
+                    <a href="#body">&lt;body&gt;</a>
+                    <div class="box"><a href="#header">&lt;header&gt;</a></div>
+                    <div class="box"><a href="#nav">&lt;nav&gt;</a></div>
+                    <div class="boxAlt">
+                        <div class="schemeArticle boxInner">
+                            <a href="#article">&lt;article&gt;</a>
+                            <div class="box">
+                                <a href="#section">&lt;section&gt;</a>
+                            </div>
+                        </div>
+                        <div class="schemeAside boxInner">
+                            <a href="#aside">&lt;aside&gt;</a>
+                            <div class="box"><a href="#p">&lt;p&gt;</a></div>
+                        </div>
+                    </div>
+                    <div class="box"><a href="#footer">&lt;footer&gt;</a></div>
+                </div>
+            </div>
+        </div>
 
-		<div class="structure-body__structure-content-left structure-body__content">
-			<h2 id="html">&lt;html&gt;</h2>
-			<p>The root level tag of an HTML document. All other HTML tags go inside the HTML tag.</p>
-			<h2 id="head">&lt;head&gt;</h2>
-			<p>The head section. Used mostly for metadata.</p>
-			<h2 id="title">&lt;title&gt;</h2>
-			<p>The title of an HTML document.</p>
-			<h2 id="meta">&lt;meta&gt;</h2>
-			<p>Used for specifying various meta information about the document. Meta tags are used within the document &lt;head&gt;.</p>
-			<h2 id="link">&lt;link&gt;</h2>
-			<p>Used for linking to external resources. Typically seen in &lt;head&gt;referring to an external style sheet. Different from the &lt;a&gt; (anchor) tag.</p>
-		</div>
-		<div class="structure-body__structure-content-center structure-body__content">
-			<h2 id="body">&lt;body&gt;</h2>
-			<p>Establishes the body of an HTML document.</p>
-			<h2 id="header">&lt;header&gt;</h2>
-			<p>Not to be confused with &lt;head&gt;, &lt;header&gt; typically contains introductory content and layout that goes above the body.</p>
-			<h2 id="nav">&lt;nav&gt;</h2>
-			<p>Used for specifying a navigational region within a document.</p>
-			<h2 id="article">&lt;article&gt;</h2>
-			<p>The &lt;article&gt; tag is new in HTML5. This tag can be used to contain blog entries, forum posts, etc.</p>
-		</div>
-		<div class="structure-body__structure-content-right structure-body__content">
-			<h2 id="section">&lt;section&gt;</h2>
-			<p>A nonspecific means of breaking up content within a webpage into sections.</p>
-			<h2 id="aside">&lt;aside&gt;</h2>
-			<p>New in HTML5. The &lt;aside&gt; element is for making sidebars that are placed next to the main content.</p>
-			<h2 id="p">&lt;p&gt;</h2>
-			<p>Paragraph. Enclose paragraphs in an article within &lt;p&gt; tags.</p>
-			<h2 id="footer">&lt;footer&gt;</h2>
-			<p>The footer of a document, below the main content.</p>
-		</div>
+        <div
+            class="structure-body__structure-content-left structure-body__content"
+        >
+            <h2 id="html">&lt;html&gt;</h2>
+            <p>
+                The root level tag of an HTML document. All other HTML tags go
+                inside the HTML tag.
+            </p>
+            <h2 id="head">&lt;head&gt;</h2>
+            <p>The head section. Used mostly for metadata.</p>
+            <h2 id="title">&lt;title&gt;</h2>
+            <p>The title of an HTML document.</p>
+            <h2 id="meta">&lt;meta&gt;</h2>
+            <p>
+                Used for specifying various meta information about the document.
+                Meta tags are used within the document &lt;head&gt;.
+            </p>
+            <h2 id="link">&lt;link&gt;</h2>
+            <p>
+                Used for linking to external resources. Typically seen in
+                &lt;head&gt;referring to an external style sheet. Different from
+                the &lt;a&gt; (anchor) tag.
+            </p>
+        </div>
+        <div
+            class="structure-body__structure-content-center structure-body__content"
+        >
+            <h2 id="body">&lt;body&gt;</h2>
+            <p>Establishes the body of an HTML document.</p>
+            <h2 id="header">&lt;header&gt;</h2>
+            <p>
+                Not to be confused with &lt;head&gt;, &lt;header&gt; typically
+                contains introductory content and layout that goes above the
+                body.
+            </p>
+            <h2 id="nav">&lt;nav&gt;</h2>
+            <p>Used for specifying a navigational region within a document.</p>
+            <h2 id="article">&lt;article&gt;</h2>
+            <p>
+                The &lt;article&gt; tag is new in HTML5. This tag can be used to
+                contain blog entries, forum posts, etc.
+            </p>
+        </div>
+        <div
+            class="structure-body__structure-content-right structure-body__content"
+        >
+            <h2 id="section">&lt;section&gt;</h2>
+            <p>
+                A nonspecific means of breaking up content within a webpage into
+                sections.
+            </p>
+            <h2 id="aside">&lt;aside&gt;</h2>
+            <p>
+                New in HTML5. The &lt;aside&gt; element is for making sidebars
+                that are placed next to the main content.
+            </p>
+            <h2 id="p">&lt;p&gt;</h2>
+            <p>
+                Paragraph. Enclose paragraphs in an article within &lt;p&gt;
+                tags.
+            </p>
+            <h2 id="footer">&lt;footer&gt;</h2>
+            <p>The footer of a document, below the main content.</p>
+        </div>
 
-		<p class="body__sources">
-			Sources:
-			<a href="https://www.w3schools.com/html/html_intro.asp" target="_blank"> W3schools.com</a> & <a href="https://eastmanreference.com/complete-list-of-html-tags" target="_blank">Eastmanreference.com</a>
-		</p>
+        <p class="body__sources">
+            Sources:
+            <a
+                href="https://www.w3schools.com/html/html_intro.asp"
+                target="_blank"
+            >
+                W3schools.com</a
+            >
+            &
+            <a
+                href="https://eastmanreference.com/complete-list-of-html-tags"
+                target="_blank"
+                >Eastmanreference.com</a
+            >
+        </p>
 
-		<footer class="body__footer">
-			<div class="footer__webtech">
-				<a href="http://www.cs.uu.nl/education/vak.php?vak=INFOB2WT" target="_blank">Webtech UU</a>
-			</div>
+        <footer class="body__footer">
+            <div class="footer__webtech">
+                <a
+                    href="http://www.cs.uu.nl/education/vak.php?vak=INFOB2WT"
+                    target="_blank"
+                    >Webtech UU</a
+                >
+            </div>
 
-			<div class="footer__navigation">
-				<ul class="navigation__list">
-					<li>
-						<a href="index.html">Home</a>
-					</li>
-					<li>
-						<a href="history.html">History</a>
-					</li>
-					<li>
-						<a href="">Structure</a>
-					</li>
-					<li>
-						<a href="assessment.html">Assessment</a>
-					</li>
-					<li>
-						<a href="faq.html">FAQ</a>
-					</li>
-					<li>
-						<a href="about.html">About</a>
-					</li>
-				</ul>
-			</div>
+            <div class="footer__navigation">
+                <ul class="navigation__list">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="history.html">History</a>
+                    </li>
+                    <li>
+                        <a href="">Structure</a>
+                    </li>
+                    <li>
+                        <a href="assessment.html">Assessment</a>
+                    </li>
+                    <li>
+                        <a href="faq.html">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="login.html">login</a>
+                    </li>
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
 
-			<div class="footer__terms">
-				<a href="resources/Terms.pdf" target="_blank">Terms and conditions</a>
-			</div>
+            <div class="footer__terms">
+                <a href="resources/Terms.pdf" target="_blank"
+                    >Terms and conditions</a
+                >
+            </div>
 
-			<div class="footer__select-element-menu footer__menu">
-				<label class="select-element-menu__label">Select tag:</label>
-				<select class="select-element-menu__select-tag" id="selectTagMenu">
-					<option value="body">body</option>
-					<option value="header">header</option>
-				    <option value="footer">footer</option>
-				    <option value="article">article</option>
-				    <option value="aside">aside</option>
-				    <option value="section">section</option>
-				</select> 
-				<label class="select-element-menu__label">Select Element:</label>
-				<select class="select-element-menu__select-item" id="elementsOfTag">
-				</select> 
-			</div>
-			
-			<div class="footer__select-property-menu footer__menu">
-				<label class="select-property-menu__label">Select property:</label>
-				<select class="select-property-menu__select-color-font" id="selectedProperty">
-				    <option value="backgroundColor">background Color</option>
-				    <option value="fontColor">font color</option>
-				    <option value="fontSize">font size</option>
-				</select> 
+            <div class="footer__select-element-menu footer__menu">
+                <label class="select-element-menu__label">Select tag:</label>
+                <select
+                    class="select-element-menu__select-tag"
+                    id="selectTagMenu"
+                >
+                    <option value="body">body</option>
+                    <option value="header">header</option>
+                    <option value="footer">footer</option>
+                    <option value="article">article</option>
+                    <option value="aside">aside</option>
+                    <option value="section">section</option>
+                </select>
+                <label class="select-element-menu__label"
+                    >Select Element:</label
+                >
+                <select
+                    class="select-element-menu__select-item"
+                    id="elementsOfTag"
+                ></select>
+            </div>
 
-				<label class="select-property-menu__label">Choose a color or font size:</label>
-				<div class="select-property-menu__color-font-group">
-					<input class="color-font-group__color" id="colorInput" type='color' value=#282923>
-					<select class="color-font-group__font" id="fontSize">
-						<option value="xx-small">xx-small</option>
-						<option value="x-small">x-small</option>
-						<option value="small">small</option>
-						<option value="medium">medium</option>
-						<option value="large">large</option>
-						<option value="x-large">x-large</option>
-						<option value="xx-large">xx-large</option>
-					</select>
-				</div>
-			</div>
+            <div class="footer__select-property-menu footer__menu">
+                <label class="select-property-menu__label"
+                    >Select property:</label
+                >
+                <select
+                    class="select-property-menu__select-color-font"
+                    id="selectedProperty"
+                >
+                    <option value="backgroundColor">background Color</option>
+                    <option value="fontColor">font color</option>
+                    <option value="fontSize">font size</option>
+                </select>
 
-			<div class="footer__button-group footer__menu">
-				<button class="button-group__apply" id="applyButton">Apply</button>
-				<button class="button-group__light-mode" id="darkmodeToggle">Toggle light mode</button>
-				<button class="button-group__count" id="countSelectedElement">count selected element</button>
-			</div>
-		</footer>
-		<script src="javascript/footerScript.js"></script>
-	</body>
+                <label class="select-property-menu__label"
+                    >Choose a color or font size:</label
+                >
+                <div class="select-property-menu__color-font-group">
+                    <input
+                        class="color-font-group__color"
+                        id="colorInput"
+                        type="color"
+                        value="#282923"
+                    />
+                    <select class="color-font-group__font" id="fontSize">
+                        <option value="xx-small">xx-small</option>
+                        <option value="x-small">x-small</option>
+                        <option value="small">small</option>
+                        <option value="medium">medium</option>
+                        <option value="large">large</option>
+                        <option value="x-large">x-large</option>
+                        <option value="xx-large">xx-large</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="footer__button-group footer__menu">
+                <button class="button-group__apply" id="applyButton">
+                    Apply
+                </button>
+                <button class="button-group__light-mode" id="darkmodeToggle">
+                    Toggle light mode
+                </button>
+                <button class="button-group__count" id="countSelectedElement">
+                    count selected element
+                </button>
+            </div>
+        </footer>
+        <script src="javascript/footerScript.js"></script>
+    </body>
 </html>
