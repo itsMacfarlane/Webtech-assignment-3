@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>HTML - About</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="About us" />
+        <meta name="keywords" content="HTML, CSS, W3C, students" />
+        <link rel="stylesheet" href="css/hertog.css?v=2.4" />
+        <link rel="icon" href="resources/favicon.ico" type="image/x-icon" />
+    </head>
+    <body class="about-body body">
+        <header class="body__header">
+            <img
+                class="header__image"
+                src="https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png"
+                alt="HTML logo"
+            />
+            <p class="header__title">HTML</p>
+        </header>
+
+        <nav class="body__navigation">
+            <ul class="navigation__list">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="history.html">History</a>
+                </li>
+                <li>
+                    <a href="structure.html">Structure</a>
+                </li>
+                <li>
+                    <a href="assessment.html">Assessment</a>
+                </li>
+                <li>
+                    <a href="faq.html">FAQ</a>
+                </li>
+                <li>
+                    <a href="">About</a>
+                </li>
+            </ul>
+        </nav>
+
+        <footer class="body__footer">
+            <div class="footer__webtech">
+                <a
+                    href="http://www.cs.uu.nl/education/vak.php?vak=INFOB2WT"
+                    target="_blank"
+                    >Webtech UU</a
+                >
+            </div>
+
+            <div class="footer__navigation">
+                <ul class="navigation__list">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="history.html">History</a>
+                    </li>
+                    <li>
+                        <a href="structure.html">Structure</a>
+                    </li>
+                    <li>
+                        <a href="assessment.html">Assessment</a>
+                    </li>
+                    <li>
+                        <a href="faq.html">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="">About</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer__terms">
+                <a href="resources/Terms.pdf" target="_blank"
+                    >Terms and conditions</a
+                >
+            </div>
+
+            <div class="footer__select-element-menu footer__menu">
+                <label class="select-element-menu__label">Select tag:</label>
+                <select
+                    class="select-element-menu__select-tag"
+                    id="selectTagMenu"
+                >
+                    <option value="body">body</option>
+                    <option value="header">header</option>
+                    <option value="footer">footer</option>
+                    <option value="article">article</option>
+                    <option value="aside">aside</option>
+                    <option value="section">section</option>
+                </select>
+                <label class="select-element-menu__label"
+                    >Select Element:</label
+                >
+                <select
+                    class="select-element-menu__select-item"
+                    id="elementsOfTag"
+                ></select>
+            </div>
+
+            <div class="footer__select-property-menu footer__menu">
+                <label class="select-property-menu__label"
+                    >Select property:</label
+                >
+                <select
+                    class="select-property-menu__select-color-font"
+                    id="selectedProperty"
+                >
+                    <option value="backgroundColor">background Color</option>
+                    <option value="fontColor">font color</option>
+                    <option value="fontSize">font size</option>
+                </select>
+
+                <label class="select-property-menu__label"
+                    >Choose a color or font size:</label
+                >
+                <div class="select-property-menu__color-font-group">
+                    <input
+                        class="color-font-group__color"
+                        id="colorInput"
+                        type="color"
+                        value="#282923"
+                    />
+                    <select class="color-font-group__font" id="fontSize">
+                        <option value="xx-small">xx-small</option>
+                        <option value="x-small">x-small</option>
+                        <option value="small">small</option>
+                        <option value="medium">medium</option>
+                        <option value="large">large</option>
+                        <option value="x-large">x-large</option>
+                        <option value="xx-large">xx-large</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="footer__button-group footer__menu">
+                <button class="button-group__apply" id="applyButton">
+                    Apply
+                </button>
+                <button class="button-group__light-mode" id="darkmodeToggle">
+                    Toggle light mode
+                </button>
+                <button class="button-group__count" id="countSelectedElement">
+                    count selected element
+                </button>
+            </div>
+        </footer>
+        <script src="javascript/footerScript.js"></script>
+    </body>
+</html>
