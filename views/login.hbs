@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>HTML - About</title>
+        <title>HTML - Login</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="About us" />
-        <meta name="keywords" content="HTML, CSS, W3C, students" />
+        <meta name="description" content="Login" />
+        <meta name="keywords" content="HTML, CSS, W3C, login, users" />
         <link rel="stylesheet" href="../css/hertog.css?v=2.4" />
         <link rel="icon" href="../resources/favicon.ico" type="../image/x-icon" />
     </head>
-    <body class="about-body body">
+    <body class="login-body body">
         <header class="body__header">
             <img
                 class="header__image"
@@ -79,6 +79,14 @@
                     </li>
                 </ul>
             </div>
+
+            <form class="login-body__form" action="/action_page.php">
+                <label for="username">Username:</label>
+                <input type="text" name="gender" id="username" placeholder="Sergey123"><br>
+                <label for="password">Password:</label>
+                <input type="text" name="gender" id="password" placeholder="ILoveTimBerners-Lee"><br><br>
+                <input type="submit" value="Submit">
+            </form>
 
             <div class="footer__terms">
                 <a href="resources/Terms.pdf" target="_blank"
