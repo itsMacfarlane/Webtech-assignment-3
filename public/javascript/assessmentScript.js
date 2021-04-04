@@ -24,7 +24,7 @@ function initializeList(id) {
     li = li.nextElementSibling;
     createLink(li, "FAQ", "faq.html", 0);
     li = li.nextElementSibling;
-    createLink(li, "Login", "login.html", 0);
+    createLink(li, "Login", "users/login", 0);
     li = li.nextElementSibling;
     createLink(li, "About", "about.html", 0);
 }

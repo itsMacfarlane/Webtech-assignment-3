@@ -11,7 +11,7 @@ var app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+app.set("view engine", "hbs");
 
 app.listen(8051, () => {
     console.log("Example app listening at http://localhost:8051");
@@ -39,7 +39,7 @@ app.use(function (err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render("error");
+    res.send("Error: " + res.locals.message);
 });
 
 module.exports = app;
