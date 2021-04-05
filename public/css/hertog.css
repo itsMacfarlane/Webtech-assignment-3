@@ -103,7 +103,22 @@ a:hover {
     grid-template:
         "header header header" 250px
         "nav nav nav" 40px
-        "loginForm loginForm loginForm" auto
+        ". . ." 50px
+        ". loginForm ." auto
+        ". . ." 50px
+        "footer footer footer" auto
+        / 1fr 1fr 1fr;
+}
+
+.register-body {
+    display: grid;
+    align-content: space-around;
+    grid-template:
+        "header header header" 250px
+        "nav nav nav" 40px
+        ". . ." 50px
+        ". registerForm ." auto
+        ". . ." 50px
         "footer footer footer" auto
         / 1fr 1fr 1fr;
 }
@@ -513,11 +528,6 @@ td {
     margin: 20px 0px;
     border: 3px solid;
     border-radius: 20px;
-    transition: transform 0.6s;
-}
-
-.questionDiv__questionBox:hover {
-    transform: scale(1.02);
 }
 
 .questionBox__title {
@@ -623,6 +633,14 @@ td {
 
 .login-body__form {
     grid-area: loginForm;
+}
+
+/*-----------------------*/
+/* layout for register page */
+/*-----------------------*/
+
+.register-body__form {
+    grid-area: registerForm;
 }
 
 /*-----------------------*/
@@ -811,7 +829,20 @@ a {
         grid-template:
             "header" 220px
             "nav" 40px
+            "." 50px
             "loginForm" auto
+            "." 50px
+            "footer" auto
+            / 1fr;
+    }
+
+    .register-body {
+        grid-template:
+            "header" 220px
+            "nav" 40px
+            "." 50px
+            "registerForm" auto
+            "." 50px
             "footer" auto
             / 1fr;
     }

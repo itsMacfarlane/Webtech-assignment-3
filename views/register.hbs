@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>HTML - Login</title>
+        <title>HTML - Register</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Login" />
@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="../css/hertog.css?v=2.4" />
         <link rel="icon" href="../resources/favicon.ico" type="../image/x-icon" />
     </head>
-    <body class="login-body body">
+    <body class="register-body body">
         <header class="body__header">
             <img
                 class="header__image"
@@ -37,7 +37,7 @@
                     <a href="../faq.html">FAQ</a>
                 </li>
                 <li>
-                    <a href="">Login</a>
+                    <a href="login">Login</a>
                 </li>
                 <li>
                     <a href="../about.html">About</a>
@@ -45,12 +45,13 @@
             </ul>
         </nav>
 
-        <form class="login-body__form" action="/action_page.php">
+        <form class="register-body__form" action="/action_page.php">
             <label for="username">Username:</label>
             <input type="text" name="username" id="username" placeholder="Sergey123"><br>
+            <label for="full name">Full name:</label>
+            <input type="text" name="fullName" id="fullName" placeholder="Sergey Sosnovsky"><br>
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br>
-            <p>or register <a href="register">here</a>!</p><br>
             <input type="submit" value="Submit">
         </form>
 
@@ -81,7 +82,7 @@
                         <a href="../faq.html">FAQ</a>
                     </li>
                     <li>
-                        <a href="">login</a>
+                        <a href="login">login</a>
                     </li>
                     <li>
                         <a href="../about.html">About</a>
