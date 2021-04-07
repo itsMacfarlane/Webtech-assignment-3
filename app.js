@@ -8,6 +8,24 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
 var app = express();
+var session = require('express-session');
+
+app.set('trust proxy', 1); // trust first proxy
+app.use(session({
+  secret: 'appelflap',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
+var currentSession;
+app.get('/', function(req, res){
+    currentSession = req.session;
+    if(currentSession.id) {
+        res.send("test");
+    } else {
+        res.send("kutzooi");
+    }
+});
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

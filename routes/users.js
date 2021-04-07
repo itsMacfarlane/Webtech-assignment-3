@@ -1,22 +1,36 @@
 var express = require("express");
+
+
 var router = express.Router();
 
+// var sqlite3 = require("sqlite3").verbose();
+// var db = new sqlite3.Database(":memory:");
+
+// db.serialize(function () {
+//     db.run(
+//         "CREATE TABLE users (user_id INTEGER, username TEXT, password TEXT)"
+//     );
+
+//     var stmt = db.prepare(
+//         "INSERT INTO users (user_id, username, password) VALUES (?, ?, ?)"
+//     );
+//     for (var i = 0; i < 10; i++) {
+//         stmt.run([i * 100, "Ipsum " + i, i]);
+//     }
+//     stmt.finalize();
+
+//     db.each("SELECT * FROM users", function (err, row) {
+//         console.log(row.username + " PASS: " + row.password);
+//     });
+// });
+
+var fs = require("fs");
+var file = "database/database.db";
+var exists = fs.existsSync(file);
 var sqlite3 = require("sqlite3").verbose();
-var db = new sqlite3.Database(":memory:");
+var db = new sqlite3.Database(file);
 
 db.serialize(function () {
-    db.run(
-        "CREATE TABLE users (user_id INTEGER, username TEXT, password TEXT)"
-    );
-
-    var stmt = db.prepare(
-        "INSERT INTO users (user_id, username, password) VALUES (?, ?, ?)"
-    );
-    for (var i = 0; i < 10; i++) {
-        stmt.run([i * 100, "Ipsum " + i, i]);
-    }
-    stmt.finalize();
-
     db.each("SELECT * FROM users", function (err, row) {
         console.log(row.username + " PASS: " + row.password);
     });
