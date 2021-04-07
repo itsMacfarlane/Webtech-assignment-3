@@ -9,14 +9,12 @@ var usersRouter = require("./routes/users");
 
 var app = express();
 
-
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
 app.listen(8051, () => {
-    console.log("Example app listening at http://localhost:8051");
+    console.log("App listening at http://localhost:8051");
 });
 
 app.use(logger("dev"));
@@ -28,14 +26,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
-//get data from database 
-var join = require('path').join;
+//get data from database
+var join = require("path").join;
 var staticPath = join(__dirname, "public/html");
 app.use(express.static(staticPath));
-app.get('login.js', function (req, res) {
-	res.send(req.query.username + " " + req.query.password);
-})
-app.listen(8051);
+app.get("login.js", function (req, res) {
+    res.send(req.query.username + " " + req.query.password);
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
