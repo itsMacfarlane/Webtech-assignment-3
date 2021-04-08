@@ -9,6 +9,15 @@
 -- 		Quiz 4
 -- 			Question 10-12
 
+CREATE TABLE Users(
+	userID integer PRIMARY KEY NOT NULL,
+	username text NOT NULL,
+	password text NOT NULL);
+
+INSERT INTO Users VALUES
+	(1, "snorrit", "123");
+	
+
 CREATE TABLE Topics(
 	topicID integer PRIMARY KEY NOT NULL,
 	title text NOT NULL,

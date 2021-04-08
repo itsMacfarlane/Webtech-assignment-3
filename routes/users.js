@@ -31,7 +31,7 @@ var sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database(file);
 
 db.serialize(function () {
-    db.each("SELECT * FROM users", function (err, row) {
+    db.each("SELECT * FROM Users", function (err, row) {
         console.log(row.username + " PASS: " + row.password);
     });
 });
@@ -53,7 +53,7 @@ router.post("/login", function (req, res, next) {
     //     return;
     // }
 
-    var sql = "SELECT user_id FROM users WHERE username=? AND password=?";
+    var sql = "SELECT userID FROM Users WHERE username=? AND password=?";
 
     db.get(sql, [req.body.username, req.body.password], (err, row) => {
         if (!row) {
