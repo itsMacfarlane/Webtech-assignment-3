@@ -32,7 +32,7 @@ router.get("/login", function (req, res, next) {
 router.post("/login", urlencodedParser, function (req, res, next) {
     //  if (isValidated(req, res)) {
     //     res.render("form", {
-    //     title: "Login Form",
+    //     title: "Logged in",
     //     errorMessage: "<div id='loginSucces'>You are logged in!</div>",
     //     });
     //     return;
@@ -54,7 +54,7 @@ router.post("/login", urlencodedParser, function (req, res, next) {
 
         // session ID aanmaken
         res.render("form", {
-            title: "Login Form",
+            title: "Loged in",
             errorMessage: "<div id='loginSucces'>You are logged in!</div>",
         });
     });
