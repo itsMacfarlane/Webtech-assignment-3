@@ -616,7 +616,7 @@ td {
 }
 
 /*-----------------------*/
-/* layout for login page */
+/* layout for form page */
 /*-----------------------*/
 
 .login-body__form {
@@ -630,19 +630,18 @@ td {
     border: 1px solid #a33a3a;
 }
 
-/*-----------------------*/
-/* layout for register page */
-/*-----------------------*/
-
-.register-body__form {
-    grid-area: loginForm;
-}
-
 #registerError {
     grid-area: error;
     color: #756e15;
     background: #fffbd1;
     border: 1px solid #87803e;
+}
+
+#loginSucces {
+    grid-area: error;
+    color: #2b7515;
+    background: #ecffd6;
+    border: 1px solid #617c42;
 }
 
 /*-----------------------*/

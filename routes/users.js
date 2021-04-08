@@ -5,7 +5,6 @@ var urlencodedParser = express.urlencoded({ extended: false });
 var router = express.Router();
 
 var fs = require("fs");
-const { callbackify } = require("util");
 var file = "database/database.db";
 var exists = fs.existsSync(file);
 var sqlite3 = require("sqlite3").verbose();
@@ -16,8 +15,6 @@ db.serialize(function () {
         console.log(row.username + " PASS: " + row.password);
     });
 });
-
-db.close();
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -33,24 +30,17 @@ router.get("/login", function (req, res, next) {
 });
 
 router.post("/login", urlencodedParser, function (req, res, next) {
-    // if (isValidated(req, res)) {
-    //     res.redirect("succesfullyLoggedIn");
+    //  if (isValidated(req, res)) {
+    //     res.render("form", {
+    //     title: "Login Form",
+    //     errorMessage: "<div id='loginSucces'>You are logged in!</div>",
+    //     });
     //     return;
     // }
-    console.log(
-        req.body.username +
-            " " +
-            typeof req.body.username +
-            " Pass: " +
-            req.body.password +
-            " " +
-            typeof req.body.username
-    );
 
     var sql = "SELECT * FROM Users WHERE username=? AND password=?";
 
     db.get(sql, [req.body.username, req.body.password], (err, row) => {
-        console.log(row);
         if (!row) {
             res.render("form", {
                 title: "Login Form",
@@ -59,23 +49,30 @@ router.post("/login", urlencodedParser, function (req, res, next) {
                 body:
                     "<form class='login-body__form' action='login' method='POST'> <label for='username'>Username:</label><input type='text' name='username' id='username' placeholder='Sergey123'><br><label for='password'>Password:</label><input type='password' name='password' id='password' placeholder='ILoveTimBerners-Lee'><br><br><p>or register <a href='register'>here</a>!</p><br><input type='submit' value='Submit'></form>",
             });
-            // return;
+            return;
         }
-        // res.send("Je staat er wel in");
-        callback(row);
+
+        // session ID aanmaken
+        res.render("form", {
+            title: "Login Form",
+            errorMessage: "<div id='loginSucces'>You are logged in!</div>",
+        });
     });
-
-    //session ID aanmaken
 });
-
-function callback(row) {
-    console.log(row);
-}
 
 router.get("/register", urlencodedParser, function (req, res, next) {
     req.session.viewCount += 1;
     // res.render('test', { viewCount: req.session.viewCount});
     console.log(req.session.viewCount);
+
+    // if(isValidated(req, res)){
+    //     res.render("form", {
+    //         title: "Login Form",
+    //         errorMessage: "<div id='loginSucces'>You are logged in!</div>",
+    //     });
+    //     return;
+    // }
+
     res.render("form", {
         title: "Register Form",
         body:
