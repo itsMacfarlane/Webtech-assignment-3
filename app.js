@@ -8,15 +8,22 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
 var app = express();
-const session = require('express-session');
+const session = require("express-session");
 
-app.use(session({
-  secret: 'appelflap',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: true }
-}));
+app.use(
+    session({
+        secret: "appelflap",
+        resave: false,
+        saveUninitialized: false,
+        cookie: { secure: true },
+    })
+);
 
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+// parse application/json
+app.use(express.json());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

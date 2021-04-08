@@ -1,31 +1,11 @@
 var express = require("express");
 
+var urlencodedParser = express.urlencoded({ extended: false });
 
 var router = express.Router();
 
-
-// var sqlite3 = require("sqlite3").verbose();
-// var db = new sqlite3.Database(":memory:");
-
-// db.serialize(function () {
-//     db.run(
-//         "CREATE TABLE users (user_id INTEGER, username TEXT, password TEXT)"
-//     );
-
-//     var stmt = db.prepare(
-//         "INSERT INTO users (user_id, username, password) VALUES (?, ?, ?)"
-//     );
-//     for (var i = 0; i < 10; i++) {
-//         stmt.run([i * 100, "Ipsum " + i, i]);
-//     }
-//     stmt.finalize();
-
-//     db.each("SELECT * FROM users", function (err, row) {
-//         console.log(row.username + " PASS: " + row.password);
-//     });
-// });
-
 var fs = require("fs");
+const { callbackify } = require("util");
 var file = "database/database.db";
 var exists = fs.existsSync(file);
 var sqlite3 = require("sqlite3").verbose();
@@ -45,33 +25,63 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/login", function (req, res, next) {
-    res.render("login");
+    res.render("form", {
+        title: "Login Form",
+        body:
+            "<form class='login-body__form' action='login' method='POST'> <label for='username'>Username:</label><input type='text' name='username' id='username' placeholder='Sergey123'><br><label for='password'>Password:</label><input type='password' name='password' id='password' placeholder='ILoveTimBerners-Lee'><br><br><p>or register <a href='register'>here</a>!</p><br><input type='submit' value='Submit'></form>",
+    });
 });
 
-router.post("/login", function (req, res, next) {
+router.post("/login", urlencodedParser, function (req, res, next) {
     // if (isValidated(req, res)) {
     //     res.redirect("succesfullyLoggedIn");
     //     return;
     // }
+    console.log(
+        req.body.username +
+            " " +
+            typeof req.body.username +
+            " Pass: " +
+            req.body.password +
+            " " +
+            typeof req.body.username
+    );
 
-    var sql = "SELECT userID FROM Users WHERE username=? AND password=?";
+    var sql = "SELECT * FROM Users WHERE username=? AND password=?";
 
     db.get(sql, [req.body.username, req.body.password], (err, row) => {
+        console.log(row);
         if (!row) {
-            res.send("Je staat er niet in pik");
+            res.render("form", {
+                title: "Login Form",
+                errorMessage:
+                    "<div id='loginError'>Wrong login credentials, try again</div>",
+                body:
+                    "<form class='login-body__form' action='login' method='POST'> <label for='username'>Username:</label><input type='text' name='username' id='username' placeholder='Sergey123'><br><label for='password'>Password:</label><input type='password' name='password' id='password' placeholder='ILoveTimBerners-Lee'><br><br><p>or register <a href='register'>here</a>!</p><br><input type='submit' value='Submit'></form>",
+            });
+            // return;
         }
-        return;
+        // res.send("Je staat er wel in");
+        callback(row);
     });
 
     //session ID aanmaken
-    res.send("Je staat er wel in");
 });
 
-router.get("/register", function (req, res, next) {
+function callback(row) {
+    console.log(row);
+}
+
+router.get("/register", urlencodedParser, function (req, res, next) {
     req.session.viewCount += 1;
     // res.render('test', { viewCount: req.session.viewCount});
     console.log(req.session.viewCount);
-    res.render("register");
+    res.render("form", {
+        title: "Register Form",
+        body:
+            '<form class="register-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123"><br><label for="full name">Full name:</label><input type="text" name="fullName" id="fullName" placeholder="Sergey Sosnovsky"><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br><input type="submit" value="Register"></form>',
+    });
 });
 
+router.post("/register", function (req, res, next) {});
 module.exports = router;

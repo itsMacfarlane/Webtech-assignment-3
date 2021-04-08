@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>HTML - Login</title>
+        <title>{{title}}</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Login" />
@@ -37,7 +37,7 @@
                     <a href="../faq.html">FAQ</a>
                 </li>
                 <li>
-                    <a href="">Login</a>
+                    <a href="login">Login</a>
                 </li>
                 <li>
                     <a href="../about.html">About</a>
@@ -45,14 +45,8 @@
             </ul>
         </nav>
 
-        <form class="login-body__form" action="login" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username" placeholder="Sergey123"><br>
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br>
-            <p>or register <a href="register">here</a>!</p><br>
-            <input type="submit" value="Submit">
-        </form>
+        {{{errorMessage}}}
+        {{{body}}}
 
         <footer class="body__footer">
             <div class="footer__webtech">
@@ -81,7 +75,7 @@
                         <a href="../faq.html">FAQ</a>
                     </li>
                     <li>
-                        <a href="">login</a>
+                        <a href="login">login</a>
                     </li>
                     <li>
                         <a href="../about.html">About</a>
@@ -165,6 +159,5 @@
             </div>
         </footer>
         <script src="../javascript/footerScript.js"></script>
-        <script src="../login.js"></script>
     </body>
 </html>

@@ -17,7 +17,6 @@ CREATE TABLE Users(
 INSERT INTO Users VALUES
 	(1, "snorrit", "123");
 	
-
 CREATE TABLE Topics(
 	topicID integer PRIMARY KEY NOT NULL,
 	title text NOT NULL,

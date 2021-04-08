@@ -104,20 +104,8 @@ a:hover {
         "header header header" 250px
         "nav nav nav" 40px
         ". . ." 50px
+        ". error ." auto
         ". loginForm ." auto
-        ". . ." 50px
-        "footer footer footer" auto
-        / 1fr 1fr 1fr;
-}
-
-.register-body {
-    display: grid;
-    align-content: space-around;
-    grid-template:
-        "header header header" 250px
-        "nav nav nav" 40px
-        ". . ." 50px
-        ". registerForm ." auto
         ". . ." 50px
         "footer footer footer" auto
         / 1fr 1fr 1fr;
@@ -635,12 +623,26 @@ td {
     grid-area: loginForm;
 }
 
+#loginError {
+    grid-area: error;
+    color: #ba3939;
+    background: #ffe0e0;
+    border: 1px solid #a33a3a;
+}
+
 /*-----------------------*/
 /* layout for register page */
 /*-----------------------*/
 
 .register-body__form {
-    grid-area: registerForm;
+    grid-area: loginForm;
+}
+
+#registerError {
+    grid-area: error;
+    color: #756e15;
+    background: #fffbd1;
+    border: 1px solid #87803e;
 }
 
 /*-----------------------*/
@@ -830,18 +832,8 @@ a {
             "header" 220px
             "nav" 40px
             "." 50px
+            "error" auto
             "loginForm" auto
-            "." 50px
-            "footer" auto
-            / 1fr;
-    }
-
-    .register-body {
-        grid-template:
-            "header" 220px
-            "nav" 40px
-            "." 50px
-            "registerForm" auto
             "." 50px
             "footer" auto
             / 1fr;
