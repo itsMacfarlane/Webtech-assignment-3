@@ -3,6 +3,7 @@ var express = require("express");
 
 var router = express.Router();
 
+
 // var sqlite3 = require("sqlite3").verbose();
 // var db = new sqlite3.Database(":memory:");
 
@@ -67,6 +68,9 @@ router.post("/login", function (req, res, next) {
 });
 
 router.get("/register", function (req, res, next) {
+    req.session.viewCount += 1;
+    // res.render('test', { viewCount: req.session.viewCount});
+    console.log(req.session.viewCount);
     res.render("register");
 });
 
