@@ -76,7 +76,7 @@ router.get("/register", urlencodedParser, function (req, res, next) {
     res.render("form", {
         title: "Register Form",
         body:
-            '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123"><br><label for="full name">Full name:</label><input type="text" name="fullName" id="fullName" placeholder="Sergey Sosnovsky"><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br><input type="submit" value="Register"></form>',
+            '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123"><br><label for="full name">Full name:</label><input type="text" name="fullName" id="fullName" placeholder="Sergey Sosnovsky"><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br><p>or login <a href="login">here</a>!</p><br><input type="submit" value="Register"></form>',
     });
 });
 
