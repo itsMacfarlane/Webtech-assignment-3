@@ -22,6 +22,14 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/login", function (req, res, next) {
+    //  if (isValidated(req, res)) {
+    //     res.render("form", {
+    //     title: "Logged in",
+    //     Message: "<div class='succesMessage'>You are logged in!</div>",
+    //     });
+    //     return;
+    // }
+
     res.render("form", {
         title: "Login Form",
         body:
@@ -33,7 +41,7 @@ router.post("/login", urlencodedParser, function (req, res, next) {
     //  if (isValidated(req, res)) {
     //     res.render("form", {
     //     title: "Logged in",
-    //     errorMessage: "<div id='loginSucces'>You are logged in!</div>",
+    //     Message: "<div class='succesMessage'>You are logged in!</div>",
     //     });
     //     return;
     // }
@@ -44,8 +52,8 @@ router.post("/login", urlencodedParser, function (req, res, next) {
         if (!row) {
             res.render("form", {
                 title: "Login Form",
-                errorMessage:
-                    "<div id='loginError'>Wrong login credentials, try again</div>",
+                Message:
+                    "<div class='errorMessage'>Wrong login credentials, try again</div>",
                 body:
                     "<form class='login-body__form' action='login' method='POST'> <label for='username'>Username:</label><input type='text' name='username' id='username' placeholder='Sergey123'><br><label for='password'>Password:</label><input type='password' name='password' id='password' placeholder='ILoveTimBerners-Lee'><br><br><p>or register <a href='register'>here</a>!</p><br><input type='submit' value='Submit'></form>",
             });
@@ -53,9 +61,11 @@ router.post("/login", urlencodedParser, function (req, res, next) {
         }
 
         // session ID aanmaken
+        // req.sesssion.userid = row.userid;
+
         res.render("form", {
-            title: "Loged in",
-            errorMessage: "<div id='loginSucces'>You are logged in!</div>",
+            title: "Logged in",
+            Message: "<div class='succesMessage'>You are logged in!</div>",
         });
     });
 });
@@ -67,8 +77,8 @@ router.get("/register", urlencodedParser, function (req, res, next) {
 
     // if(isValidated(req, res)){
     //     res.render("form", {
-    //         title: "Login Form",
-    //         errorMessage: "<div id='loginSucces'>You are logged in!</div>",
+    //         title: "Logged in",
+    //         Message: "<div class='succesMessage'>You are logged in!</div>",
     //     });
     //     return;
     // }
@@ -76,10 +86,53 @@ router.get("/register", urlencodedParser, function (req, res, next) {
     res.render("form", {
         title: "Register Form",
         body:
-            '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123"><br><label for="full name">Full name:</label><input type="text" name="fullName" id="fullName" placeholder="Sergey Sosnovsky"><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br><p>or login <a href="login">here</a>!</p><br><input type="submit" value="Register"></form>',
+            '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123"><br><label for="fullname">Full name:</label><input type="text" name="fullname" id="fullname" placeholder="Sergey Sosnovsky"><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br><p>or login <a href="login">here</a>!</p><br><input type="submit" value="Register"></form>',
     });
 });
 
-router.post("/register", function (req, res, next) {});
+router.post("/register", function (req, res, next) {
+    var sql = "SELECT * FROM Users WHERE username=?";
+    db.get(sql, req.body.username, (err, row) => {
+        if (row) {
+            res.render("form", {
+                title: "Register Form",
+                Message:
+                    "<div class='informationalMessage'>This username is already in use, sorry!</div>",
+                body:
+                    '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123"><br><label for="fullname">Full name:</label><input type="text" name="fullname" id="fullname" placeholder="Sergey Sosnovsky"><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br><p>or login <a href="login">here</a>!</p><br><input type="submit" value="Register"></form>',
+            });
+            return;
+        }
+
+        sql =
+            "INSERT INTO Users(userID, username, password, fullname) VALUES (?, ?, ?, ?)";
+        db.run(
+            sql,
+            [
+                Date.now(),
+                req.body.username,
+                req.body.password,
+                req.body.fullname
+            ],
+            (err) => {
+                console.log(err);
+                if (err) {
+                    res.render("form", {
+                        title: "Register Form",
+                        Message:
+                            "<div class='errorMessage'>Something went wrong, try again please!</div>",
+                        body:
+                            '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123"><br><label for="fullname">Full name:</label><input type="text" name="fullname" id="fullname" placeholder="Sergey Sosnovsky"><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br><p>or login <a href="login">here</a>!</p><br><input type="submit" value="Register"></form>',
+                    });
+                }
+                
+                res.render("form", {
+                    title: "Logged in",
+                    Message: "<div class='succesMessage'>You are logged in!</div>",
+                });
+            }
+        );
+    });
+});
 
 module.exports = router;

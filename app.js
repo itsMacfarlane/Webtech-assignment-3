@@ -14,7 +14,7 @@ app.use(
         secret: "appelflap",
         resave: false,
         saveUninitialized: false,
-        cookie: { secure: true },
+        cookie: {},
     })
 );
 

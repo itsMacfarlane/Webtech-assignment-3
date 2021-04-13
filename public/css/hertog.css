@@ -623,21 +623,21 @@ td {
     grid-area: loginForm;
 }
 
-#loginError {
+.errorMessage {
     grid-area: error;
     color: #ba3939;
     background: #ffe0e0;
     border: 1px solid #a33a3a;
 }
 
-#registerError {
+.informationalMessage {
     grid-area: error;
     color: #756e15;
     background: #fffbd1;
     border: 1px solid #87803e;
 }
 
-#loginSucces {
+.succesMessage {
     grid-area: error;
     color: #2b7515;
     background: #ecffd6;
