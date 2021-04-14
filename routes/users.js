@@ -92,7 +92,7 @@ router.get("/register", urlencodedParser, function (req, res, next) {
 
 router.post("/register", function (req, res, next) {
     var sql = "SELECT * FROM Users WHERE username=?";
-    db.get(sql, req.body.username, (err, row) => {
+    db.get(sql, [req.body.username], (err, row) => {
         if (row) {
             res.render("form", {
                 title: "Register Form",
