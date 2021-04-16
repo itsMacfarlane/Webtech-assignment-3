@@ -12,8 +12,19 @@ var db = new sqlite3.Database(file);
 
 
 router.get("/", function(req, res, next){
-    res.send("Jo man")
+    res.send("Nothing to see here...")
 });
 
+router.get("/topic", function(req, res, next){
+    res.send("Nothing to see here...")
+});
+
+router.get("/quiz", function(req, res, next){
+    res.send("Nothing to see here...")
+});
+
+router.get("/question", function(req, res, next){
+    res.send("Nothing to see here...")
+});
 
 module.exports = router;
