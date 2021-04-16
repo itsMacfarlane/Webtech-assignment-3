@@ -20,11 +20,11 @@ CREATE TABLE Topics(
 	title text NOT NULL,
 	description text NOT NULL);
 
-CREATE TABLE Quizes(
+CREATE TABLE Quizzes(
 	quizID integer PRIMARY KEY NOT NULL,
 	topicID integer NOT NULL,
 	title text NOT NULL,
-	CONSTRAINT quizes_fk_topicID FOREIGN KEY (topicID) 
+	CONSTRAINT quizzes_fk_topicID FOREIGN KEY (topicID) 
 		REFERENCES Topics(topicID));
 
 CREATE TABLE Questions(
@@ -35,7 +35,7 @@ CREATE TABLE Questions(
 	statement text NOT NULL,	-- ______ for blank
 	correctAnswer text NOT NULL,
 	CONSTRAINT questions_fk_quizID FOREIGN KEY (quizID) 
-		REFERENCES Quizes(quizID));
+		REFERENCES Quizzes(quizID));
 
 CREATE TABLE Answers(
 	answerID integer PRIMARY KEY,
@@ -51,7 +51,7 @@ INSERT INTO Topics VALUES
 	(101, "History", "The history of html"),
 	(102, "Structure", "The structure of a html file");
 
-INSERT INTO Quizes VALUES
+INSERT INTO Quizzes VALUES
 	(201, 101, "History 1"),
 	(202, 101, "History 2"),
 	(203, 102, "Structure 1"),
@@ -78,32 +78,31 @@ INSERT INTO Answers VALUES
 	(404, 302, "United States"),
 	(405, 303, "Hyper"),
 	(406, 303, "Hard"),
-	(407, 303, "Hyper"),
-	(408, 303, "Handy"),
-	(409, 303, "Historic"),
-	(410, 303, "Horror"),
-	(411, 303, "Hardware"),
-	(412, 304, "HTML 4"),
-	(413, 304, "HTML 5"),
-	(414, 304, "HTML 6"),
-	(415, 304, "XHTML"),
-	(416, 306, "Markup"),
-	(417, 306, "Machine"),
-	(418, 306, "Main"),
-	(419, 306, "Minimalistic"),
-	(420, 306, "Manual"),
-	(421, 306, "Mild"),
-	(422, 307, "<head>"),
-	(423, 307, "<html>"),
-	(424, 307, "<!DOCTYPE html>"),
-	(425, 307, "<body>"),
-	(426, 310, "<html>"),
-	(427, 310, "<!DOCTYPE html>"),
-	(428, 310, "<!DOC html>"),
-	(429, 311, "To define metadata"),
-	(430, 311, "To create a header"),
-	(431, 311, "To create response headers"),
-	(432, 311, "To give a title to an article");
+	(407, 303, "Handy"),
+	(408, 303, "Historic"),
+	(409, 303, "Horror"),
+	(410, 303, "Hardware"),
+	(411, 304, "HTML 4"),
+	(412, 304, "HTML 5"),
+	(413, 304, "HTML 6"),
+	(414, 304, "XHTML"),
+	(415, 306, "Markup"),
+	(416, 306, "Machine"),
+	(417, 306, "Main"),
+	(418, 306, "Minimalistic"),
+	(419, 306, "Manual"),
+	(420, 306, "Mild"),
+	(421, 307, "<head>"),
+	(422, 307, "<html>"),
+	(423, 307, "<!DOCTYPE html>"),
+	(424, 307, "<body>"),
+	(425, 310, "<html>"),
+	(426, 310, "<!DOCTYPE html>"),
+	(427, 310, "<!DOC html>"),
+	(428, 311, "To define metadata"),
+	(429, 311, "To create a header"),
+	(430, 311, "To create response headers"),
+	(431, 311, "To give a title to an article");
 
 
 
