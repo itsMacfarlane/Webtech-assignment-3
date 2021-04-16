@@ -22,13 +22,12 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/login", function (req, res, next) {
-    //  if (isValidated(req, res)) {
-    //     res.render("form", {
-    //     title: "Logged in",
-    //     Message: "<div class='succesMessage'>You are logged in!</div>",
-    //     });
-    //     return;
-    // }
+    if(isValidated(req, res)){
+        res.redirect("loggedin", {
+            Message: "<div class='succesMessage'>You are logged in!</div>",
+        });
+        return;
+    }
 
     res.render("form", {
         title: "Login Form",
@@ -38,13 +37,12 @@ router.get("/login", function (req, res, next) {
 });
 
 router.post("/login", urlencodedParser, function (req, res, next) {
-    //  if (isValidated(req, res)) {
-    //     res.render("form", {
-    //     title: "Logged in",
-    //     Message: "<div class='succesMessage'>You are logged in!</div>",
-    //     });
-    //     return;
-    // }
+    if(isValidated(req, res)){
+        res.redirect("loggedin", {
+            Message: "<div class='succesMessage'>You are logged in!</div>",
+        });
+        return;
+    }
 
     var sql = "SELECT * FROM Users WHERE username=? AND password=?";
 
@@ -63,8 +61,7 @@ router.post("/login", urlencodedParser, function (req, res, next) {
         // session ID aanmaken
         // req.sesssion.userid = row.userid;
 
-        res.render("form", {
-            title: "Logged in",
+        res.redirect("loggedin", {
             Message: "<div class='succesMessage'>You are logged in!</div>",
         });
     });
@@ -75,13 +72,12 @@ router.get("/register", urlencodedParser, function (req, res, next) {
     // res.render('test', { viewCount: req.session.viewCount});
     console.log(req.session.viewCount);
 
-    // if(isValidated(req, res)){
-    //     res.render("form", {
-    //         title: "Logged in",
-    //         Message: "<div class='succesMessage'>You are logged in!</div>",
-    //     });
-    //     return;
-    // }
+    if(isValidated(req, res)){
+        res.redirect("loggedin", {
+            Message: "<div class='succesMessage'>You are logged in!</div>",
+        });
+        return;
+    }
 
     res.render("form", {
         title: "Register Form",
@@ -126,13 +122,30 @@ router.post("/register", function (req, res, next) {
                     });
                 }
                 
-                res.render("form", {
-                    title: "Logged in",
+                res.redirect("loggedin", {
                     Message: "<div class='succesMessage'>You are logged in!</div>",
                 });
             }
         );
     });
 });
+
+function isValidated(req, res){
+    if(req.session.userID)
+    {
+        var sql = "SELECT * FROM Users WHERE userID = ?";
+        
+        db.get(sql, [req.session.userID], (err, row) => {
+            if(row) return true;
+            else return false;
+        });
+    }
+    return false;
+}
+
+
+
+
+
 
 module.exports = router;
