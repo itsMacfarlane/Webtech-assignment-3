@@ -414,39 +414,6 @@ dropDownFooter4 = new dropDownFooter(
     "footer__select-property-menu footer__menu"
 );
 
-Q1 = new FITBQuestion(
-    "Q1",
-    "In January of 2000, ______ became a standard together with HTML 4.01.",
-    "XHTML",
-    "Fill in the blank:"
-);
-Q2 = new selectQuestion(
-    "Q2",
-    "In which country was the World Wide Web invented?",
-    "Switzerland",
-    ["Switzerland", "USA", "France", "UK"]
-);
-Q3 = new selectQuestion("Q3", "What does the H in HTML stand for?", "Hyper", [
-    "Hyper",
-    "Horror",
-    "Historic",
-    "Hard",
-    "Handy",
-    "Hardware",
-]);
-Q4 = new selectQuestion(
-    "Q4",
-    "Who knows the most about the internet?",
-    "Sergey Sosnovksy",
-    ["Sergey Sosnovksy", "Bill Gates", "Tim Berners-Lee", "Jorrit Koerts"]
-);
-Q5 = new FITBQuestion(
-    "Q5",
-    "Paragraph. Enclose paragraphs in an article within ______ tags.",
-    "<p>",
-    "Fill in the blank:"
-);
-
 window.addEventListener("load", function () {
     initializeDiv(
         "footer__webtech",
@@ -491,9 +458,4 @@ window.addEventListener("load", function () {
     );
     initializeList("upperList");
     initializeList("lowerList");
-    Q1.initializeFieldFITB();
-    Q2.initializeFieldMC();
-    Q3.initializeFieldDropDown();
-    Q4.initializeFieldMC();
-    Q5.initializeFieldFITB();
 });

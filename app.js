@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var usersRouter = require("./routes/users");
+var assessmentRouter = require("./routes/assessment");
 
 var app = express();
 const session = require("express-session");
@@ -39,6 +40,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/users", usersRouter);
+app.use("/assessment", assessmentRouter);
 
 //get data from database
 var join = require("path").join;

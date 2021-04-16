@@ -18,7 +18,7 @@ db.serialize(function () {
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
-    res.send("respond with a resource");
+    res.send("Please add /login or /register");
 });
 
 router.get("/login", function (req, res, next) {
@@ -33,7 +33,7 @@ router.get("/login", function (req, res, next) {
     res.render("form", {
         title: "Login Form",
         body:
-            "<form class='login-body__form' action='login' method='POST'> <label for='username'>Username:</label><input type='text' name='username' id='username' placeholder='Sergey123'><br><label for='password'>Password:</label><input type='password' name='password' id='password' placeholder='ILoveTimBerners-Lee'><br><br><p>or register <a href='register'>here</a>!</p><br><input type='submit' value='Submit'></form>",
+            "<form class='login-body__form' action='login' method='POST'> <label for='username'>Username:</label><input type='text' name='username' id='username' placeholder='Sergey123' required><br><label for='password'>Password:</label><input type='password' name='password' id='password' placeholder='ILoveTimBerners-Lee' required><br><br><p>or register <a href='register'>here</a>!</p><br><input type='submit' value='Submit'></form>",
     });
 });
 
@@ -55,7 +55,7 @@ router.post("/login", urlencodedParser, function (req, res, next) {
                 Message:
                     "<div class='errorMessage'>Wrong login credentials, try again</div>",
                 body:
-                    "<form class='login-body__form' action='login' method='POST'> <label for='username'>Username:</label><input type='text' name='username' id='username' placeholder='Sergey123'><br><label for='password'>Password:</label><input type='password' name='password' id='password' placeholder='ILoveTimBerners-Lee'><br><br><p>or register <a href='register'>here</a>!</p><br><input type='submit' value='Submit'></form>",
+                    "<form class='login-body__form' action='login' method='POST'> <label for='username'>Username:</label><input type='text' name='username' id='username' placeholder='Sergey123' required><br><label for='password'>Password:</label><input type='password' name='password' id='password' placeholder='ILoveTimBerners-Lee' required><br><br><p>or register <a href='register'>here</a>!</p><br><input type='submit' value='Submit'></form>",
             });
             return;
         }
@@ -86,7 +86,7 @@ router.get("/register", urlencodedParser, function (req, res, next) {
     res.render("form", {
         title: "Register Form",
         body:
-            '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123"><br><label for="fullname">Full name:</label><input type="text" name="fullname" id="fullname" placeholder="Sergey Sosnovsky"><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br><p>or login <a href="login">here</a>!</p><br><input type="submit" value="Register"></form>',
+            '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123" required><br><label for="fullname">Full name:</label><input type="text" name="fullname" id="fullname" placeholder="Sergey Sosnovsky" required><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee" required><br><br><p>or login <a href="login">here</a>!</p><br><input type="submit" value="Register"></form>',
     });
 });
 
@@ -99,7 +99,7 @@ router.post("/register", function (req, res, next) {
                 Message:
                     "<div class='informationalMessage'>This username is already in use, sorry!</div>",
                 body:
-                    '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123"><br><label for="fullname">Full name:</label><input type="text" name="fullname" id="fullname" placeholder="Sergey Sosnovsky"><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br><p>or login <a href="login">here</a>!</p><br><input type="submit" value="Register"></form>',
+                    '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123" required><br><label for="fullname">Full name:</label><input type="text" name="fullname" id="fullname" placeholder="Sergey Sosnovsky" required><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee" required><br><br><p>or login <a href="login">here</a>!</p><br><input type="submit" value="Register"></form>',
             });
             return;
         }
@@ -122,7 +122,7 @@ router.post("/register", function (req, res, next) {
                         Message:
                             "<div class='errorMessage'>Something went wrong, try again please!</div>",
                         body:
-                            '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123"><br><label for="fullname">Full name:</label><input type="text" name="fullname" id="fullname" placeholder="Sergey Sosnovsky"><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br><p>or login <a href="login">here</a>!</p><br><input type="submit" value="Register"></form>',
+                            '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123" required><br><label for="fullname">Full name:</label><input type="text" name="fullname" id="fullname" placeholder="Sergey Sosnovsky" required><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee" required><br><br><p>or login <a href="login">here</a>!</p><br><input type="submit" value="Register"></form>',
                     });
                 }
                 
