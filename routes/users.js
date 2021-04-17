@@ -57,8 +57,7 @@ router.post("/login", urlencodedParser, function (req, res, next) {
         }
 
         // session ID aanmaken
-
-        //req.sesssion.userid = row.userid;
+        req.session.userid = row.userID;
 
         res.redirect("loggedin");
     });
@@ -70,9 +69,7 @@ router.get("/register", urlencodedParser, function (req, res, next) {
     console.log(req.session.viewCount);
 
     if (isValidated(req, res)) {
-        res.redirect("loggedin", {
-            Message: "<div class='succesMessage'>You are logged in!</div>",
-        });
+        res.redirect("loggedin");
         return;
     }
 
@@ -119,10 +116,7 @@ router.post("/register", function (req, res, next) {
                     });
                 }
 
-                res.redirect("loggedin", {
-                    Message:
-                        "<div class='succesMessage'>You are logged in!</div>",
-                });
+                res.redirect("loggedin");
             }
         );
     });
