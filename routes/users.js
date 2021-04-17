@@ -22,10 +22,9 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/login", function (req, res, next) {
+    console.log(isValidated(req, res) + "isValidated");
     if (isValidated(req, res)) {
-        res.redirect("loggedin", {
-            Message: "<div class='succesMessage'>You are logged in!</div>",
-        });
+        res.redirect("loggedin");
         return;
     }
 
@@ -57,7 +56,7 @@ router.post("/login", urlencodedParser, function (req, res, next) {
         }
 
         // session ID aanmaken
-        req.session.userid = row.userID;
+        req.session.userID = row.userID;
 
         res.redirect("loggedin");
     });
@@ -122,16 +121,42 @@ router.post("/register", function (req, res, next) {
     });
 });
 
-function isValidated(req, res) {
-    if (req.session.userID) {
-        var sql = "SELECT * FROM Users WHERE userID = ?";
-
-        db.get(sql, [req.session.userID], (err, row) => {
-            if (row) return true;
-            else return false;
+router.get("/loggedin", function (req, res, next){
+    if (isValidated(req, res))
+    {
+        console.log("Op naar de login");
+        res.render("loggedin", {
+            Message: "<div class='succesMessage'>You are logged in!</div>"
         });
     }
-    return false;
+
+    else 
+    {
+        console.log("Op naar de register");
+        res.redirect("register");
+    }
+});
+
+
+function isValidated(req, res) {
+
+    if (req.session.userID!=null) {
+        var sql = "SELECT * FROM Users WHERE userID=?";
+        db.get(sql, [req.session.userID], (err, row) => {
+            console.log(row);
+            if (!row) {
+                return false;
+            }
+            else { 
+                console.log("ik ben WAAR");
+                return true;
+            }
+        });
+    }
+    else {
+        console.log("ik ben FALSE man");
+        return false;
+    }
 }
 
 module.exports = router;
