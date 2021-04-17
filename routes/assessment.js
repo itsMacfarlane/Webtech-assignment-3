@@ -16,20 +16,16 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/topics", function (req, res, next) {
-    db.serialize(function () {
-        db.all("SELECT * FROM Topics", function (err, content) {
-            res.send(content);
-        });
+    db.all("SELECT * FROM Topics", function (err, content) {
+        res.send(content);
     });
 });
 
 router.get("/quizzes", function (req, res, next) {
     var sql = "SELECT * FROM Quizzes WHERE topicID = ?";
 
-    db.serialize(function () {
-        db.all(sql, [req.query.topicID], function (err, content) {
-            res.send(content);
-        });
+    db.all(sql, [req.query.topicID], function (err, content) {
+        res.send(content);
     });
 });
 
@@ -37,20 +33,16 @@ router.get("/questions", function (req, res, next) {
     var sql =
         "SELECT questionID, quizID, title, type, statement FROM Questions WHERE quizID = ?";
 
-    db.serialize(function () {
-        db.all(sql, [req.query.quizID], function (err, content) {
-            res.send(content);
-        });
+    db.all(sql, [req.query.quizID], function (err, content) {
+        res.send(content);
     });
 });
 
 router.get("/answers", function (req, res, next) {
     var sql = "SELECT * FROM Answers WHERE questionID= ?";
 
-    db.serialize(function () {
-        db.all(sql, [req.query.questionID], function (err, content) {
-            res.send(content);
-        });
+    db.all(sql, [req.query.questionID], function (err, content) {
+        res.send(content);
     });
 });
 
@@ -58,18 +50,12 @@ router.get("/check", function (req, res, next) {
     var sql =
         "SELECT * FROM Questions WHERE questionID = ? AND correctAnswer = ?";
 
-    db.serialize(function () {
-        db.all(
-            sql,
-            [req.query.questionID, req.query.answer],
-            function (err, row) {
-                if (!row.length) {
-                    res.send("Incorrect");
-                } else {
-                    res.send("Correct");
-                }
-            }
-        );
+    db.all(sql, [req.query.questionID, req.query.answer], function (err, row) {
+        if (!row.length) {
+            res.send("Incorrect");
+        } else {
+            res.send("Correct");
+        }
     });
 });
 

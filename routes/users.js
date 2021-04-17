@@ -58,6 +58,9 @@ router.post("/login", urlencodedParser, function (req, res, next) {
         // session ID aanmaken
         req.session.userID = row.userID;
 
+        sql = "INSERT INTO Sessions(sessionID, userID) VALUES (?, ?)";
+        db.run(sql, [req.session.id, row.userID]);
+
         res.redirect("loggedin");
     });
 });

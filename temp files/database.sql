@@ -44,8 +44,33 @@ CREATE TABLE Answers(
 	CONSTRAINT answers_fk_questionID FOREIGN KEY (questionID) 
 		REFERENCES Questions(questionID));
 
+CREATE TABLE Sessions(
+	sessionID text PRIMARY KEY,
+	userID integer,
+	currentQuestionID integer,
+	CONSTRAINT sessions_fk_userID FOREIGN KEY (userID)
+		REFERENCES Users(userID),
+	CONSTRAINT sessions_fk_currentQuestionID FOREIGN KEY (currentQuestionID)
+		REFERENCES Questions(questionID));
+
+CREATE TABLE Scores(
+	scoreID integer PRIMARY KEY,
+	userID integer, 
+	sessionID integer, 
+	questionID integer,
+	correct boolean,
+	CONSTRAINT score_fk_userID FOREIGN KEY (userID)
+		REFERENCES Users(userID),
+	CONSTRAINT score_fk_sessionID FOREIGN KEY (sessionID)
+		REFERENCES Sessions(sessionID),
+	CONSTRAINT score_fk_questionID FOREIGN KEY (questionID)
+		REFERENCES Questions(questionID));
+
+
+-- temp test data
 INSERT INTO Users VALUES
 	(1618309599882, "snorrit", "123", "Jorrit Koerts");
+-- temp test data END
 
 INSERT INTO Topics VALUES
 	(101, "History", "The history of html"),
