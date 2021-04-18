@@ -149,7 +149,7 @@ router.get("/report", function (req, res, next) {
                 userScore = (userCorrect / (userIncorrect + userCorrect)) * 100;
 
                 res.render("form", {
-                    title: "Login Form",
+                    title: "Report",
                     body:
                         "<p> session score: " +
                         sessionScore +
