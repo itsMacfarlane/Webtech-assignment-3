@@ -64,7 +64,34 @@ submitChoiceButton.addEventListener("click", function() {
 		nextButton.classList.remove("hide-me");
 		sumbitCounter++;
 	} else {
-		//check if answer is correct
+
+		if(ourData[counter].type == "M") {
+			var radios = document.getElementsByName(ourData[counter].questionID);
+			for (var i = 0, length = radios.length; i < length; i++) {
+				if (radios[i].checked) {
+					var value = radios[i].value;
+					break;
+				}
+			}
+		} else {
+			var value = document.getElementById(ourData[counter].questionID).value;
+		}
+
+
+
+		var ourRequest = new XMLHttpRequest();
+		ourRequest.open('GET', '/assessment/check?questionID=' + ourData[counter].questionID + '&answer=' + value);
+		ourRequest.onload = function() {
+			var checkAnswer = ourRequest.responseText;
+			if(checkAnswer == "Correct"){
+				console.log("Congratz!");
+			} else {
+				console.log("Wrong, the right answer is " + checkAnswer);
+			}
+		};
+		ourRequest.send();
+		
+		
 	}
 
 
@@ -201,6 +228,7 @@ function createDropDown(answerData, name, option) {
 
 function createMC(answerData) {
 	var form = document.createElement("form");
+	form.id = ourData[counter].questionID;
 	shuffleArray(answerData);
 	for (var i = 0; i < answerData.length; i++) {
 		console.log("hallo");
@@ -228,7 +256,7 @@ function createFITB(magicNumber) {
 	var input = document.createElement("input");
 	Object.assign(input, {
 		type: "text",
-		name: magicNumber,
+		id: magicNumber,
 	});
 	
 	var div = document.getElementById("quizzes");

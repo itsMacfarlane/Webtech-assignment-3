@@ -87,12 +87,12 @@ INSERT INTO Questions VALUES
 	(302, 201, "History quiz 1 question 2", "M", "In which country was the World Wide Web invented?", "Switzerland"),
 	(303, 201, "History quiz 1 question 3", "S", "What does the H in HTML stand for?", "Hyper"),
 	(304, 202, "History quiz 2 question 1", "M", "What is the current version of HTML?", "HTML 5"),
-	(305, 202, "History quiz 2 question 2", "O", "______ is used to style a webpage.", "css"),
+	(305, 202, "History quiz 2 question 2", "O", "______ is used to style a webpage.", "CSS"),
 	(306, 202, "History quiz 2 question 3", "S", "What does the M in HTML stand for?", "Markup"),
 	(307, 203, "Structure quiz 3 question 1", "M", "What is the root level tag of an html document?", "<html>"),
 	(308, 203, "Structure quiz 3 question 2", "O", "<______>, this tag is used to create a navigation.", "nav"),
 	(309, 203, "Structure quiz 3 question 3", "O", "To create a sidebar we use <______>.", "aside"),
-	(310, 204, "Structure quiz 4 question 1", "S", "With what tag must a html document start?", "<!DOCTYPE html"),
+	(310, 204, "Structure quiz 4 question 1", "S", "With what tag must a html document start?", "<!DOCTYPE html>"),
 	(311, 204, "Structure quiz 4 question 2", "M", "What is de tag <head> used for?", "To define metadata"),
 	(312, 204, "Structure quiz 4 question 3", "O", "<______> is the parent tag of <body>", "html");
 
