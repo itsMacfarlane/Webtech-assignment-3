@@ -523,6 +523,10 @@ td {
     font-weight: bold;
 }
 
+.hide-me {
+    display: none;
+}
+
 /*------------------*/
 /* layout for faq page */
 /*------------------*/

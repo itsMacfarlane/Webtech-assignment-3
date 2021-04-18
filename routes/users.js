@@ -22,10 +22,9 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/login", function (req, res, next) {
-    if(isValidated(req, res)){
-        res.redirect("loggedin", {
-            Message: "<div class='succesMessage'>You are logged in!</div>",
-        });
+    console.log(isValidated(req, res) + "isValidated");
+    if (isValidated(req, res)) {
+        res.redirect("loggedin");
         return;
     }
 
@@ -37,10 +36,8 @@ router.get("/login", function (req, res, next) {
 });
 
 router.post("/login", urlencodedParser, function (req, res, next) {
-    if(isValidated(req, res)){
-        res.redirect("loggedin", {
-            Message: "<div class='succesMessage'>You are logged in!</div>",
-        });
+    if (isValidated(req, res)) {
+        res.redirect("loggedin");
         return;
     }
 
@@ -59,11 +56,12 @@ router.post("/login", urlencodedParser, function (req, res, next) {
         }
 
         // session ID aanmaken
-        // req.sesssion.userid = row.userid;
+        req.session.userID = row.userID;
 
-        res.redirect("loggedin", {
-            Message: "<div class='succesMessage'>You are logged in!</div>",
-        });
+        sql = "INSERT INTO Sessions(sessionID, userID) VALUES (?, ?)";
+        db.run(sql, [req.session.id, row.userID]);
+
+        res.redirect("loggedin");
     });
 });
 
@@ -72,10 +70,8 @@ router.get("/register", urlencodedParser, function (req, res, next) {
     // res.render('test', { viewCount: req.session.viewCount});
     console.log(req.session.viewCount);
 
-    if(isValidated(req, res)){
-        res.redirect("loggedin", {
-            Message: "<div class='succesMessage'>You are logged in!</div>",
-        });
+    if (isValidated(req, res)) {
+        res.redirect("loggedin");
         return;
     }
 
@@ -108,7 +104,7 @@ router.post("/register", function (req, res, next) {
                 Date.now(),
                 req.body.username,
                 req.body.password,
-                req.body.fullname
+                req.body.fullname,
             ],
             (err) => {
                 console.log(err);
@@ -121,31 +117,49 @@ router.post("/register", function (req, res, next) {
                             '<form class="login-body__form" action="register" method="POST"><label for="username">Username:</label><input type="text" name="username" id="username" placeholder="Sergey123" required><br><label for="fullname">Full name:</label><input type="text" name="fullname" id="fullname" placeholder="Sergey Sosnovsky" required><br><label for="password">Password:</label><input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee" required><br><br><p>or login <a href="login">here</a>!</p><br><input type="submit" value="Register"></form>',
                     });
                 }
-                
-                res.redirect("loggedin", {
-                    Message: "<div class='succesMessage'>You are logged in!</div>",
-                });
+
+                res.redirect("loggedin");
             }
         );
     });
 });
 
-function isValidated(req, res){
-    if(req.session.userID)
+router.get("/loggedin", function (req, res, next){
+    if (isValidated(req, res))
     {
-        var sql = "SELECT * FROM Users WHERE userID = ?";
-        
-        db.get(sql, [req.session.userID], (err, row) => {
-            if(row) return true;
-            else return false;
+        console.log("Op naar de login");
+        res.render("loggedin", {
+            Message: "<div class='succesMessage'>You are logged in!</div>"
         });
     }
-    return false;
+
+    else 
+    {
+        console.log("Op naar de register");
+        res.redirect("register");
+    }
+});
+
+
+function isValidated(req, res) {
+
+    if (req.session.userID!=null) {
+        var sql = "SELECT * FROM Users WHERE userID=?";
+        db.get(sql, [req.session.userID], (err, row) => {
+            console.log(row);
+            if (!row) {
+                return false;
+            }
+            else { 
+                console.log("ik ben WAAR");
+                return true;
+            }
+        });
+    }
+    else {
+        console.log("ik ben FALSE man");
+        return false;
+    }
 }
-
-
-
-
-
 
 module.exports = router;
