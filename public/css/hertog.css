@@ -106,6 +106,7 @@ a:hover {
         ". . ." 50px
         ". error ." auto
         ". loginForm ." auto
+        ". reportButton ." auto
         ". . ." 50px
         "footer footer footer" auto
         / 1fr 1fr 1fr;
@@ -648,6 +649,10 @@ td {
     border: 1px solid #617c42;
 }
 
+.reportButton {
+    grid-area: reportButton;
+    height: 40px;
+}
 /*-----------------------*/
 /* layout for about page */
 /*-----------------------*/
@@ -837,6 +842,7 @@ a {
             "." 50px
             "error" auto
             "loginForm" auto
+            "reportButton" auto
             "." 50px
             "footer" auto
             / 1fr;
