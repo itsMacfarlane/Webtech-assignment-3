@@ -51,7 +51,6 @@ router.get("/check", function (req, res, next) {
         "SELECT * FROM Questions WHERE questionID = ? AND correctAnswer = ?";
 
     db.all(sql, [req.query.questionID, req.query.answer], function (err, row) {
-
         sql2 = "INSERT INTO Scores VALUES (?, ?, ? , ?, ?)";
         if (!row.length) {
             if (req.session.userID) {
@@ -74,7 +73,6 @@ router.get("/check", function (req, res, next) {
                     true,
                 ]);
             }
-
             res.send("Correct");
         }
     });
@@ -84,7 +82,6 @@ router.get("/getanswer", function (req, res, next) {
     sql = "SELECT correctAnswer FROM Questions where questionID = ?";
     db.get(sql, [req.query.questionID], function (err, row) {
         res.send(row);
-
     });
 });
 
@@ -117,8 +114,12 @@ router.get("/usersucces", function (req, res, next) {
             }
         });
         res.send("correct: " + correct + " --- incorrect: " + incorrect);
-
     });
+});
+
+router.post("/setcurrentquestion", function (req, res, next) {
+    var sql = "UPDATE Sessions SET currentQuestionID = ? WHERE sessionID = ?";
+    db.run(sql, [req.query.questionID, req.session.id]);
 });
 
 module.exports = router;
