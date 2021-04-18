@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>HTML - About</title>
+        <title>HTML - Register</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="About us" />
-        <meta name="keywords" content="HTML, CSS, W3C, students" />
-        <link rel="stylesheet" href="css/hertog.css?v=2.4" />
-        <link rel="icon" href="resources/favicon.ico" type="image/x-icon" />
+        <meta name="description" content="Login" />
+        <meta name="keywords" content="HTML, CSS, W3C, login, users" />
+        <link rel="stylesheet" href="../css/hertog.css?v=2.4" />
+        <link rel="icon" href="../resources/favicon.ico" type="../image/x-icon" />
     </head>
-    <body class="about-body body">
+    <body class="register-body body">
         <header class="body__header">
             <img
                 class="header__image"
@@ -22,88 +22,38 @@
         <nav class="body__navigation">
             <ul class="navigation__list">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="../index.html">Home</a>
                 </li>
                 <li>
-                    <a href="history.html">History</a>
+                    <a href="../history.html">History</a>
                 </li>
                 <li>
-                    <a href="structure.html">Structure</a>
+                    <a href="../structure.html">Structure</a>
                 </li>
                 <li>
-                    <a href="assessment/quiz">Assessment</a>
+                    <a href="../assessment.html">Assessment</a>
                 </li>
                 <li>
-                    <a href="faq.html">FAQ</a>
+                    <a href="../faq.html">FAQ</a>
                 </li>
                 <li>
-                    <a href="users/login">login</a>
+                    <a href="login">Login</a>
                 </li>
                 <li>
-                    <a href="">About</a>
+                    <a href="../about.html">About</a>
                 </li>
             </ul>
         </nav>
 
-        <div class="about-body__profile-one about-body__profile">
-            <img
-                src="resources/folkert.jfif"
-                alt="Profile Picture Folkert Muntz"
-            />
-            <div class="profile__container">
-                <p class="container__name">Folkert Muntz</p>
-                <p class="container__title">CEO &amp; Founder</p>
-                <br />
-                <p>Folka de Polka</p>
-                <p>f.c.a.muntz@students.uu.nl</p>
-                <button
-                    class="container__button"
-                    onclick="window.location.href='mailto:f.c.a.muntz@studens.uu.nl';"
-                >
-                    Contact
-                </button>
-            </div>
-        </div>
-
-        <div class="about-body__profile-two about-body__profile">
-            <img src="resources/marc.png" alt="Profile Picture Marc de Jong" />
-            <div class="profile__container">
-                <p class="container__name">Marc de Jong</p>
-                <p class="container__title">Designer</p>
-                <br />
-                <p>Marc de Parc</p>
-                <a href="https://www.marcdejong.online/" target="_blank"
-                    >marcdejong.online</a
-                >
-                <p>m.dejong14@students.uu.nl</p>
-                <button
-                    class="container__button"
-                    onclick="window.location.href='https://www.marcdejong.online/contact-2';"
-                >
-                    Contact
-                </button>
-            </div>
-        </div>
-
-        <div class="about-body__profile-three about-body__profile">
-            <img
-                src="resources/diploma.jpg"
-                alt="Profile Picture Jorrit Koerts"
-            />
-            <div class="profile__container">
-                <p class="container__name">Jorrit Koerts</p>
-                <p class="container__title">Bier liefhebber</p>
-                <br />
-                <p>Jorrit de Porrit</p>
-                <p>j.koerts@students.uu.nl</p>
-                <button
-                    class="container__button"
-                    onclick="window.location.href='mailto:j.koerts@students.uu.nl';"
-                >
-                    Contact
-                </button>
-            </div>
-        </div>
+        <form class="register-body__form" action="register" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" placeholder="Sergey123"><br>
+            <label for="full name">Full name:</label>
+            <input type="text" name="fullName" id="fullName" placeholder="Sergey Sosnovsky"><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" placeholder="ILoveTimBerners-Lee"><br><br>
+            <input type="submit" value="Submit">
+        </form>
 
         <footer class="body__footer">
             <div class="footer__webtech">
@@ -117,25 +67,25 @@
             <div class="footer__navigation">
                 <ul class="navigation__list">
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="../index.html">Home</a>
                     </li>
                     <li>
-                        <a href="history.html">History</a>
+                        <a href="../history.html">History</a>
                     </li>
                     <li>
-                        <a href="structure.html">Structure</a>
+                        <a href="../structure.html">Structure</a>
                     </li>
                     <li>
-                        <a href="assessment.html">Assessment</a>
+                        <a href="../assessment.html">Assessment</a>
                     </li>
                     <li>
-                        <a href="faq.html">FAQ</a>
+                        <a href="../faq.html">FAQ</a>
                     </li>
                     <li>
-                        <a href="users/login">Login</a>
+                        <a href="login">login</a>
                     </li>
                     <li>
-                        <a href="">About</a>
+                        <a href="../about.html">About</a>
                     </li>
                 </ul>
             </div>
@@ -215,6 +165,6 @@
                 </button>
             </div>
         </footer>
-        <script src="javascript/footerScript.js"></script>
+        <script src="../javascript/footerScript.js"></script>
     </body>
 </html>

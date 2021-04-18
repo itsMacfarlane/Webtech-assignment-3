@@ -10,6 +10,8 @@ var assessmentRouter = require("./routes/assessment");
 var app = express();
 const session = require("express-session");
 
+// session setup
+app.set('trust proxy', 1);
 app.use(
     session({
         secret: "appelflap",

@@ -15,6 +15,18 @@ router.get("/", function (req, res, next) {
     res.send("Nothing to see here...");
 });
 
+router.get("/quiz", function (req, res, next) {
+    if (req.session.userID) {
+        res.redirect(".html");
+        return;
+    } else {
+        res.render("form", {
+            title: "Login Form",
+            Message: "<div class='errorMessage'>Log in first</div>",
+        });
+    }
+})
+
 router.get("/topics", function (req, res, next) {
     db.all("SELECT * FROM Topics", function (err, content) {
         res.send(content);

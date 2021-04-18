@@ -17,6 +17,7 @@ window.addEventListener("load", function() {
 
 })
 
+
 submitChoiceButton.addEventListener("click", function() {
 	if (sumbitCounter == 0) {
 		var value = document.getElementById("Topics").value;
