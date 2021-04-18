@@ -52,10 +52,32 @@ router.get("/check", function (req, res, next) {
 
     db.all(sql, [req.query.questionID, req.query.answer], function (err, row) {
         if (!row.length) {
+            db.run(sql2, [
+                Date.now(),
+                req.session.userID,
+                req.session.id,
+                req.session.id,
+                false,
+            ]);
             res.send("Incorrect");
         } else {
+            sql2 = "INSERT INTO Scores VALUES (?, ?, ? ,?)";
+            db.run(sql2, [
+                Date.now(),
+                req.session.userID,
+                req.session.id,
+                req.session.id,
+                true,
+            ]);
             res.send("Correct");
         }
+    });
+});
+
+router.get("/getanswer", function (req, res, next) {
+    sql = "SELECT correctAnswer FROM Questions where questionID = ?";
+    db.get(sql, [req.query.questionID], function (err, row) {
+        res.send(row);
     });
 });
 
