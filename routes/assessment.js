@@ -51,24 +51,30 @@ router.get("/check", function (req, res, next) {
         "SELECT * FROM Questions WHERE questionID = ? AND correctAnswer = ?";
 
     db.all(sql, [req.query.questionID, req.query.answer], function (err, row) {
+
+        sql2 = "INSERT INTO Scores VALUES (?, ?, ? , ?, ?)";
         if (!row.length) {
-            db.run(sql2, [
-                Date.now(),
-                req.session.userID,
-                req.session.id,
-                req.session.id,
-                false,
-            ]);
+            if (req.session.userID) {
+                db.run(sql2, [
+                    Date.now(),
+                    req.session.userID,
+                    req.session.id,
+                    req.query.questionID,
+                    false,
+                ]);
+            }
             res.send("Incorrect");
         } else {
-            sql2 = "INSERT INTO Scores VALUES (?, ?, ? ,?)";
-            db.run(sql2, [
-                Date.now(),
-                req.session.userID,
-                req.session.id,
-                req.session.id,
-                true,
-            ]);
+            if (req.session.userID) {
+                db.run(sql2, [
+                    Date.now(),
+                    req.session.userID,
+                    req.session.id,
+                    req.query.questionID,
+                    true,
+                ]);
+            }
+
             res.send("Correct");
         }
     });
@@ -78,6 +84,40 @@ router.get("/getanswer", function (req, res, next) {
     sql = "SELECT correctAnswer FROM Questions where questionID = ?";
     db.get(sql, [req.query.questionID], function (err, row) {
         res.send(row);
+
+    });
+});
+
+router.get("/sessionsucces", function (req, res, next) {
+    var sql = "SELECT correct FROM Scores WHERE sessionID = ?";
+    var correct = 0;
+    var incorrect = 0;
+    db.all(sql, [req.session.id], function (err, rows) {
+        rows.forEach((row) => {
+            if (row.correct) {
+                correct += 1;
+            } else {
+                incorrect += 1;
+            }
+        });
+        res.send("correct: " + correct + " --- incorrect: " + incorrect);
+    });
+});
+
+router.get("/usersucces", function (req, res, next) {
+    var sql = "SELECT correct FROM Scores WHERE userID = ?";
+    var correct = 0;
+    var incorrect = 0;
+    db.all(sql, [req.session.userID], function (err, rows) {
+        rows.forEach((row) => {
+            if (row.correct) {
+                correct += 1;
+            } else {
+                incorrect += 1;
+            }
+        });
+        res.send("correct: " + correct + " --- incorrect: " + incorrect);
+
     });
 });
 
