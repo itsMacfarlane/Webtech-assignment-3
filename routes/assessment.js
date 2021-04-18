@@ -47,68 +47,47 @@ router.get("/answers", function (req, res, next) {
 });
 
 router.get("/check", function (req, res, next) {
-    var sql =
-        "SELECT * FROM Questions WHERE questionID = ? AND correctAnswer = ?";
+    if (req.session.userID) {
+        var sql =
+            "SELECT * FROM Questions WHERE questionID = ? AND correctAnswer = ?";
 
-    db.all(sql, [req.query.questionID, req.query.answer], function (err, row) {
-        sql2 = "INSERT INTO Scores VALUES (?, ?, ? , ?, ?)";
-        if (!row.length) {
-            if (req.session.userID) {
-                db.run(sql2, [
-                    Date.now(),
-                    req.session.userID,
-                    req.session.id,
-                    req.query.questionID,
-                    false,
-                ]);
+        db.all(
+            sql,
+            [req.query.questionID, req.query.answer],
+            function (err, row) {
+                sql2 = "INSERT INTO Scores VALUES (?, ?, ? , ?, ?)";
+                if (!row.length) {
+                    if (req.session.userID) {
+                        db.run(sql2, [
+                            Date.now(),
+                            req.session.userID,
+                            req.session.id,
+                            req.query.questionID,
+                            false,
+                        ]);
+                    }
+                    sql3 =
+                        "SELECT correctAnswer FROM Questions where questionID = ?";
+                    db.get(sql3, [req.query.questionID], function (err, row) {
+                        res.send(row.correctAnswer);
+                    });
+                } else {
+                    if (req.session.userID) {
+                        db.run(sql2, [
+                            Date.now(),
+                            req.session.userID,
+                            req.session.id,
+                            req.query.questionID,
+                            true,
+                        ]);
+                    }
+                    res.send("Correct");
+                }
             }
-            sql3 = "SELECT correctAnswer FROM Questions where questionID = ?";
-            db.get(sql3, [req.query.questionID], function (err, row) {
-                res.send(row.correctAnswer);
-            });
-        } else {
-            if (req.session.userID) {
-                db.run(sql2, [
-                    Date.now(),
-                    req.session.userID,
-                    req.session.id,
-                    req.query.questionID,
-                    true,
-                ]);
-            }
-            res.send("Correct");
-        }
-    });
-});
-
-router.get("/sessionsucces", function (req, res, next) {
-    var sql = "SELECT correct FROM Scores WHERE sessionID = ?";
-    var sessionCorrect = 0;
-    var sessionIncorrect = 0;
-    db.all(sql, [req.session.id], function (err, rows) {
-        rows.forEach((row) => {
-            if (row.correct) {
-                correct += 1;
-            } else {
-                incorrect += 1;
-            }
-        });
-    });
-});
-
-router.get("/usersucces", function (req, res, next) {
-    var sql2 = "SELECT correct FROM Scores WHERE userID = ?";
-    var userCorrect = 0;
-    var userIncorrect = 0;
-    db.all(sql2, [req.session.userID], function (err, rows) {
-        rows.forEach((row) => {
-            if (row.correct) {
-                correct += 1;
-            } else {
-                incorrect += 1;
-            }
-        });
-    });
+        );
+    } else {
+        res.send("Login");
+    }
 });
 
 router.post("/setcurrentquestion", function (req, res, next) {
