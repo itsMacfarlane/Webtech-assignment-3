@@ -44,14 +44,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/users", usersRouter);
 app.use("/assessment", assessmentRouter);
 
-//get data from database
-var join = require("path").join;
-var staticPath = join(__dirname, "public/html");
-app.use(express.static(staticPath));
-app.get("login.js", function (req, res) {
-    res.send(req.query.username + " " + req.query.password);
-});
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

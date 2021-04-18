@@ -154,7 +154,7 @@ router.get("/report", function (req, res, next) {
                     res.render("form", {
                         title: "Report",
                         Message:
-                            "<div class='errorMessage'>Make a quiz to see your report</div>",
+                            "<div class='errorMessage'>Do one of the quizzes to see your report here</div>",
                     });
                 } else {
                     res.render("form", {

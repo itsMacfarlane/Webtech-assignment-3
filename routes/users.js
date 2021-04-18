@@ -68,10 +68,6 @@ router.post("/login", urlencodedParser, function (req, res, next) {
 });
 
 router.get("/register", urlencodedParser, function (req, res, next) {
-    req.session.viewCount += 1;
-    // res.render('test', { viewCount: req.session.viewCount});
-    console.log(req.session.viewCount);
-
     if (req.session.userID) {
         res.redirect("loggedin");
         return;
