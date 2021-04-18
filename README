@@ -2,7 +2,6 @@ README
 
 GROUP ID: 51
 
-
 Names and student numbers of all authors:
 Folkert Muntz - 2137941
 Marc de Jong
@@ -37,20 +36,20 @@ A brief explanation of your web-site, the structure of your application, includi
 
 Logins and passwords of all registered students:
 
-username1:
-password1:
+username1: snorrit
+password1: jonkohierjonkodaar
 
-username2:
-password2:
+username2: folka
+password2: strijderman123
 
-username3:
-password3:
+username3: marcus
+password3: forceofhabit_444
 
-username4:
-password4:
+username4: sergey123
+password4: ILoveTimBerners-Lee123
 
-username5:
-password5:
+username5: GillBates
+password5: MicrosoftIsBae2002
 
 The SQL definition of your database (the CREATE TABLE statements):
 -- 	Topic 1
