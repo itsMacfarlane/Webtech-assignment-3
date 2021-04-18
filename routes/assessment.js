@@ -83,8 +83,8 @@ router.get("/check", function (req, res, next) {
 
 router.get("/sessionsucces", function (req, res, next) {
     var sql = "SELECT correct FROM Scores WHERE sessionID = ?";
-    var correct = 0;
-    var incorrect = 0;
+    var sessionCorrect = 0;
+    var sessionIncorrect = 0;
     db.all(sql, [req.session.id], function (err, rows) {
         rows.forEach((row) => {
             if (row.correct) {
@@ -93,15 +93,14 @@ router.get("/sessionsucces", function (req, res, next) {
                 incorrect += 1;
             }
         });
-        res.send("correct: " + correct + " --- incorrect: " + incorrect);
     });
 });
 
 router.get("/usersucces", function (req, res, next) {
-    var sql = "SELECT correct FROM Scores WHERE userID = ?";
-    var correct = 0;
-    var incorrect = 0;
-    db.all(sql, [req.session.userID], function (err, rows) {
+    var sql2 = "SELECT correct FROM Scores WHERE userID = ?";
+    var userCorrect = 0;
+    var userIncorrect = 0;
+    db.all(sql2, [req.session.userID], function (err, rows) {
         rows.forEach((row) => {
             if (row.correct) {
                 correct += 1;
@@ -109,13 +108,59 @@ router.get("/usersucces", function (req, res, next) {
                 incorrect += 1;
             }
         });
-        res.send("correct: " + correct + " --- incorrect: " + incorrect);
     });
 });
 
 router.post("/setcurrentquestion", function (req, res, next) {
     var sql = "UPDATE Sessions SET currentQuestionID = ? WHERE sessionID = ?";
     db.run(sql, [req.query.questionID, req.session.id]);
+});
+
+router.get("/report", function (req, res, next) {
+    var sql = "SELECT correct FROM Scores WHERE sessionID = ?";
+    var sessionCorrect = 0;
+    var sessionIncorrect = 0;
+    var sessionScore;
+    var userScore;
+    var sql2 = "SELECT correct FROM Scores WHERE userID = ?";
+    var userCorrect = 0;
+    var userIncorrect = 0;
+    db.serialize(function () {
+        db.all(sql, [req.session.id], function (err, rows) {
+            rows.forEach((row) => {
+                if (row.correct) {
+                    sessionCorrect += 1;
+                } else {
+                    sessionIncorrect += 1;
+                }
+            });
+
+            sessionScore =
+                (sessionCorrect / (sessionIncorrect + sessionCorrect)) * 100;
+
+            db.all(sql2, [req.session.userID], function (err, rows) {
+                rows.forEach((row) => {
+                    if (row.correct) {
+                        userCorrect += 1;
+                    } else {
+                        userIncorrect += 1;
+                    }
+                });
+                userScore = (userCorrect / (userIncorrect + userCorrect)) * 100;
+
+                res.render("form", {
+                    title: "Login Form",
+                    body:
+                        "<p> session score: " +
+                        sessionScore +
+                        " % </p>" +
+                        "<p> user score: " +
+                        userScore +
+                        " % </p>",
+                });
+            });
+        });
+    });
 });
 
 module.exports = router;
