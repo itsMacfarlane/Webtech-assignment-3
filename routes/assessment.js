@@ -64,7 +64,7 @@ router.get("/check", function (req, res, next) {
             }
             sql3 = "SELECT correctAnswer FROM Questions where questionID = ?";
             db.get(sql3, [req.query.questionID], function (err, row) {
-                res.send(row);
+                res.send(row.correctAnswer);
             });
         } else {
             if (req.session.userID) {
@@ -80,13 +80,6 @@ router.get("/check", function (req, res, next) {
         }
     });
 });
-
-// router.get("/getanswer", function (req, res, next) {
-//     sql = "SELECT correctAnswer FROM Questions where questionID = ?";
-//     db.get(sql, [req.query.questionID], function (err, row) {
-//         res.send(row);
-//     });
-// });
 
 router.get("/sessionsucces", function (req, res, next) {
     var sql = "SELECT correct FROM Scores WHERE sessionID = ?";
