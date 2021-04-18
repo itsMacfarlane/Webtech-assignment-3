@@ -148,16 +148,30 @@ router.get("/report", function (req, res, next) {
                 });
                 userScore = (userCorrect / (userIncorrect + userCorrect)) * 100;
 
-                res.render("form", {
-                    title: "Report",
-                    body:
-                        "<p> session score: " +
-                        sessionScore +
-                        " % </p>" +
-                        "<p> user score: " +
-                        userScore +
-                        " % </p>",
-                });
+                if (req.session.userID && !isNaN(userScore)) {
+                    res.render("form", {
+                        title: "Report",
+                        body:
+                            "<p> session score: " +
+                            sessionScore +
+                            " % </p>" +
+                            "<p> user score: " +
+                            userScore +
+                            " % </p>",
+                    });
+                } else if (req.session.userID && isNaN(userScore)) {
+                    res.render("form", {
+                        title: "Report",
+                        Message:
+                            "<div class='errorMessage'>Make a quiz to see your report</div>",
+                    });
+                } else {
+                    res.render("form", {
+                        title: "Report",
+                        Message:
+                            "<div class='errorMessage'>Log in to see your report</div>",
+                    });
+                }
             });
         });
     });
