@@ -98,9 +98,11 @@ router.post("/setcurrentquestion", function (req, res, next) {
 router.get("/getcurrentquestion", function (req, res, next) {
     var sql = "SELECT currentQuestionID FROM Sessions WHERE sessionID = ?";
     db.get(sql, [req.session.id], function (err, row) {
-        if (row.currentQuestionID) {
-            res.send(row.currentQuestionID);
-        } else res.send();
+        if (row) {
+            if (row.currentQuestionID) {
+                res.send(row.currentQuestionID);
+            } else res.send("NaN");
+        } else res.send("NaN");
     });
 });
 
