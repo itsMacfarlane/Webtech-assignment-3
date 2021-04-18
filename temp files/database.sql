@@ -66,12 +66,6 @@ CREATE TABLE Scores(
 	CONSTRAINT score_fk_questionID FOREIGN KEY (questionID)
 		REFERENCES Questions(questionID));
 
-
--- temp test data
-INSERT INTO Users VALUES
-	(1618309599882, "snorrit", "123", "Jorrit Koerts");
--- temp test data END
-
 INSERT INTO Topics VALUES
 	(101, "History", "The history of html"),
 	(102, "Structure", "The structure of a html file");
