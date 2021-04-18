@@ -4,12 +4,8 @@ var counter = 0;
 var ourData = "";
 var sumbitCounter = 0;
 
-window.addEventListener("load", function() {
 
-	var text = document.createTextNode("Pick your desired topic");
-	var div = document.getElementById("quizzes");
-	div.appendChild(text);
-	div.appendChild(document.createElement("br"));
+window.addEventListener("load", function() {
 
 	var ourRequest = new XMLHttpRequest();
 	ourRequest.open('GET', '/assessment/topics');
@@ -29,11 +25,7 @@ submitChoiceButton.addEventListener("click", function() {
 		while(quizContainer.firstChild){
 			quizContainer.removeChild(quizContainer.firstChild);
 		}
-		var text = document.createTextNode("Pick your desired quiz");
-		var div = document.getElementById("quizzes");
-		div.appendChild(text);
-		div.appendChild(document.createElement("br"));
-
+		
 		var ourRequest = new XMLHttpRequest();
 		ourRequest.open('GET', '/assessment/quizzes?topicID=' + value);
 		ourRequest.onload = function() {
@@ -56,7 +48,7 @@ submitChoiceButton.addEventListener("click", function() {
 
 			ourData = JSON.parse(ourRequest.responseText);
 			console.log(ourData);
-			renderQuestion(ourData, counter);
+			
 			renderInput(ourData, counter);
 		
 		};
@@ -85,8 +77,12 @@ submitChoiceButton.addEventListener("click", function() {
 			var checkAnswer = ourRequest.responseText;
 			if(checkAnswer == "Correct"){
 				console.log("Congratz!");
+				var field = document.getElementById("fieldset-" + ourData[counter].questionID);
+           		field.style.backgroundColor = "lightgreen";
 			} else {
 				console.log("Wrong, the right answer is " + checkAnswer);
+				var field = document.getElementById("fieldset-" + ourData[counter].questionID);
+          		field.style.backgroundColor = "tomato";
 			}
 		};
 		ourRequest.send();
@@ -114,8 +110,8 @@ nextButton.addEventListener("click", function() {
 
 	}
 	
-	renderQuestion(ourData, counter);
 	renderInput(ourData, counter);
+
 });
 
 previousButton.addEventListener("click", function() {
@@ -129,7 +125,7 @@ previousButton.addEventListener("click", function() {
 		previousButton.classList.add("hide-me");
 	}
 
-	renderQuestion(ourData, counter);
+	
 	renderInput(ourData, counter);
 })
 
@@ -194,7 +190,8 @@ function createDropDown(answerData, name, option) {
         name: name,
         id: name,
     });
-   
+    
+    
     	
 	shuffleArray(answerData);
 	console.log(answerData);
@@ -205,28 +202,57 @@ function createDropDown(answerData, name, option) {
     		option.text = answerData[i].answer;
     		option.value = answerData[i].answer;
     		selectMenu.appendChild(option);
+    		
     	} else if (option == 0) {
     		let option = document.createElement("option");
     		option.text = answerData[i].title;
     		option.value = answerData[i].topicID;
     		selectMenu.appendChild(option);
+    		
 		} else if (option == 2) {
 			let option = document.createElement("option");
     		option.text = answerData[i].title;
     		option.value = answerData[i].quizID;
     		selectMenu.appendChild(option);
+    		
+    		
 		}
+   	}
+
+   	if (option == 1) {
+   		var field = document.createElement("fieldset");
+   		field.setAttribute("class", "questionDiv__questionBox");
+   		field.setAttribute("id", "fieldset-" + ourData[counter].questionID);
+   		var question = document.createTextNode(ourData[counter].statement);
+		field.appendChild(question);
+   	} else if (option == 0) {
+   		var field = document.createElement("fieldset");
+    	field.setAttribute("class", "questionDiv__questionBox");
+   		field.setAttribute("id", "fieldset-" + name);
+   		var question = document.createTextNode("Pick your desired topic");
+    	field.appendChild(question);
+
+   	} else if (option == 2) {
+   		var field = document.createElement("fieldset");
+	    field.setAttribute("class", "questionDiv__questionBox");
+	    field.setAttribute("id", "fieldset-" + name);
+   		var question = document.createTextNode("Pick your desired quiz");
+    	field.appendChild(question);
    	}
 	
 	console.log("Succes");
 	
 	var div = document.getElementById("quizzes");
-	div.appendChild(document.createElement("br"));
-	div.appendChild(selectMenu);
+	field.appendChild(document.createElement("br"));
+	field.appendChild(selectMenu);
+	div.appendChild(field);
 
 }
 
 function createMC(answerData) {
+	var field = document.createElement("fieldset");
+    field.setAttribute("class", "questionDiv__questionBox");
+    field.setAttribute("id", "fieldset-" + ourData[counter].questionID);
 	var form = document.createElement("form");
 	form.id = ourData[counter].questionID;
 	shuffleArray(answerData);
@@ -235,10 +261,12 @@ function createMC(answerData) {
     	form.appendChild(createInput(answerData, i));
     	form.appendChild(document.createTextNode(answerData[i].answer));
    	}
-   	
+   	var question = document.createTextNode(ourData[counter].statement);
+	field.appendChild(question);
    	var div = document.getElementById("quizzes");
    	div.appendChild(document.createElement("br"));
-	div.appendChild(form);
+   	field.appendChild(form)
+	div.appendChild(field);
 }
 
 function createInput(answerData, i) {
@@ -253,13 +281,19 @@ function createInput(answerData, i) {
 }
 
 function createFITB(magicNumber) {
+	var field = document.createElement("fieldset");
+    field.setAttribute("class", "questionDiv__questionBox");
+    field.setAttribute("id", "fieldset-" + ourData[counter].questionID);
 	var input = document.createElement("input");
 	Object.assign(input, {
 		type: "text",
 		id: magicNumber,
 	});
-	
+	var question = document.createTextNode(ourData[counter].statement);
+	field.appendChild(question);
+
 	var div = document.getElementById("quizzes");
 	div.appendChild(document.createElement("br"));
-	div.appendChild(input);
+	field.appendChild(input)
+	div.appendChild(field);
 }
