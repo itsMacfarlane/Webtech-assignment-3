@@ -10,12 +10,6 @@ var exists = fs.existsSync(file);
 var sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database(file);
 
-db.serialize(function () {
-    db.each("SELECT * FROM Users", function (err, row) {
-        console.log(row.username + " PASS: " + row.password);
-    });
-});
-
 /* GET users listing. */
 router.get("/", function (req, res, next) {
     res.send("Please add /login or /register");
@@ -41,11 +35,8 @@ router.post("/login", urlencodedParser, function (req, res, next) {
     }
 
     var sql = "SELECT * FROM Users WHERE username=? AND password=?";
-    console.log(req.body.username);
-    console.log(req.body.password);
 
     db.get(sql, [req.body.username, req.body.password], (err, row) => {
-        console.log("test: " + row);
         if (!row) {
             res.render("form", {
                 title: "Login Form",
@@ -161,23 +152,5 @@ router.post("/update", function (req, res, next) {
         }
     });
 });
-
-// function isValidated(req, res) {
-//     if (req.session.userID != null) {
-//         var sql = "SELECT * FROM Users WHERE userID=?";
-//         db.get(sql, [req.session.userID], (err, row) => {
-//             if (!row) {
-//                 console.log("First false");
-//                 return false;
-//             } else {
-//                 console.log("First true");
-//                 return true;
-//             }
-//         });
-//     } else {
-//         console.log("Second false");
-//         return false;
-//     }
-// }
 
 module.exports = router;
