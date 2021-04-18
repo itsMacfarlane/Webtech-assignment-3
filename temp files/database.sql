@@ -128,7 +128,3 @@ INSERT INTO Answers VALUES
 	(429, 311, "To create a header"),
 	(430, 311, "To create response headers"),
 	(431, 311, "To give a title to an article");
-
-
-
-
