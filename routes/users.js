@@ -34,15 +34,18 @@ router.get("/login", function (req, res, next) {
     }
 });
 
-router.post("/login", urlencodedParser, async function (req, res, next) {
+router.post("/login", urlencodedParser, function (req, res, next) {
     if (req.session.userID) {
         res.redirect("loggedin");
         return;
     }
 
     var sql = "SELECT * FROM Users WHERE username=? AND password=?";
+    console.log(req.body.username);
+    console.log(req.body.password);
 
     db.get(sql, [req.body.username, req.body.password], (err, row) => {
+        console.log("test: " + row);
         if (!row) {
             res.render("form", {
                 title: "Login Form",
@@ -64,7 +67,7 @@ router.post("/login", urlencodedParser, async function (req, res, next) {
     });
 });
 
-router.get("/register", urlencodedParser, async function (req, res, next) {
+router.get("/register", urlencodedParser, function (req, res, next) {
     req.session.viewCount += 1;
     // res.render('test', { viewCount: req.session.viewCount});
     console.log(req.session.viewCount);
@@ -123,7 +126,7 @@ router.post("/register", function (req, res, next) {
     });
 });
 
-router.get("/loggedin", async function (req, res, next) {
+router.get("/loggedin", function (req, res, next) {
     if (req.session.userID) {
         res.render("loggedin", {
             Message: "<div class='succesMessage'>You are logged in!</div>",
@@ -131,6 +134,36 @@ router.get("/loggedin", async function (req, res, next) {
     } else {
         res.redirect("register");
     }
+});
+
+router.post("/update", function (req, res, next) {
+    var sql = "SELECT * FROM Users WHERE userID = ? AND password = ?";
+    var sql2 =
+        "UPDATE Users SET username = ?, password = ?, fullname = ? WHERE userID = ?";
+    db.get(sql, [req.session.userID, req.body.oldPassword], (err, row) => {
+        if (row) {
+            db.run(
+                sql2,
+                [
+                    req.body.username,
+                    req.body.password,
+                    req.body.fullname,
+                    req.session.userID,
+                ],
+                (err) => {
+                    res.render("info updated", {
+                        Message:
+                            "<div class='succesMessage'>User information updated</div>",
+                    });
+                }
+            );
+        } else {
+            res.render("loggedin", {
+                Message:
+                    "<div class='errorMessage'>Incorrect old password</div>",
+            });
+        }
+    });
 });
 
 // function isValidated(req, res) {
