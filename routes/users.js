@@ -22,21 +22,20 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/login", function (req, res, next) {
-    console.log(isValidated(req, res) + "isValidated");
-    if (isValidated(req, res)) {
+    if (req.session.userID) {
         res.redirect("loggedin");
         return;
+    } else {
+        res.render("form", {
+            title: "Login Form",
+            body:
+                "<form class='login-body__form' action='login' method='POST'> <label for='username'>Username:</label><input type='text' name='username' id='username' placeholder='Sergey123' required><br><label for='password'>Password:</label><input type='password' name='password' id='password' placeholder='ILoveTimBerners-Lee' required><br><br><p>or register <a href='register'>here</a>!</p><br><input type='submit' value='Submit'></form>",
+        });
     }
-
-    res.render("form", {
-        title: "Login Form",
-        body:
-            "<form class='login-body__form' action='login' method='POST'> <label for='username'>Username:</label><input type='text' name='username' id='username' placeholder='Sergey123' required><br><label for='password'>Password:</label><input type='password' name='password' id='password' placeholder='ILoveTimBerners-Lee' required><br><br><p>or register <a href='register'>here</a>!</p><br><input type='submit' value='Submit'></form>",
-    });
 });
 
-router.post("/login", urlencodedParser, function (req, res, next) {
-    if (isValidated(req, res)) {
+router.post("/login", urlencodedParser, async function (req, res, next) {
+    if (req.session.userID) {
         res.redirect("loggedin");
         return;
     }
@@ -65,12 +64,12 @@ router.post("/login", urlencodedParser, function (req, res, next) {
     });
 });
 
-router.get("/register", urlencodedParser, function (req, res, next) {
+router.get("/register", urlencodedParser, async function (req, res, next) {
     req.session.viewCount += 1;
     // res.render('test', { viewCount: req.session.viewCount});
     console.log(req.session.viewCount);
 
-    if (isValidated(req, res)) {
+    if (req.session.userID) {
         res.redirect("loggedin");
         return;
     }
@@ -124,42 +123,32 @@ router.post("/register", function (req, res, next) {
     });
 });
 
-router.get("/loggedin", function (req, res, next){
-    if (isValidated(req, res))
-    {
-        console.log("Op naar de login");
+router.get("/loggedin", async function (req, res, next) {
+    if (req.session.userID) {
         res.render("loggedin", {
-            Message: "<div class='succesMessage'>You are logged in!</div>"
+            Message: "<div class='succesMessage'>You are logged in!</div>",
         });
-    }
-
-    else 
-    {
-        console.log("Op naar de register");
+    } else {
         res.redirect("register");
     }
 });
 
-
-function isValidated(req, res) {
-
-    if (req.session.userID!=null) {
-        var sql = "SELECT * FROM Users WHERE userID=?";
-        db.get(sql, [req.session.userID], (err, row) => {
-            console.log(row);
-            if (!row) {
-                return false;
-            }
-            else { 
-                console.log("ik ben WAAR");
-                return true;
-            }
-        });
-    }
-    else {
-        console.log("ik ben FALSE man");
-        return false;
-    }
-}
+// function isValidated(req, res) {
+//     if (req.session.userID != null) {
+//         var sql = "SELECT * FROM Users WHERE userID=?";
+//         db.get(sql, [req.session.userID], (err, row) => {
+//             if (!row) {
+//                 console.log("First false");
+//                 return false;
+//             } else {
+//                 console.log("First true");
+//                 return true;
+//             }
+//         });
+//     } else {
+//         console.log("Second false");
+//         return false;
+//     }
+// }
 
 module.exports = router;
