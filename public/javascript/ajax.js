@@ -5,15 +5,27 @@ var ourData = "";
 var sumbitCounter = 0;
 
 
+
 window.addEventListener("load", function() {
 
-	var ourRequest = new XMLHttpRequest();
-	ourRequest.open('GET', '/assessment/topics');
-	ourRequest.onload = function() {
-		var topicsData = JSON.parse(ourRequest.responseText);
-		createDropDown(topicsData, "Topics", 0);
+
+	var currentQuestion = new XMLHttpRequest();
+	currentQuestion.open('GET', '/assessment/getcurrentquestion');
+	currentQuestion.onload = function() {
+		var getcurrentquestion = JSON.parse(currentQuestion.responseText);
+		console.log(getcurrentquestion.currentQuestionID);
 	}
-	ourRequest.send();
+	currentQuestion.send();
+
+	if(getcurrentquestion.currentQuestionID == null) {
+		var ourRequest = new XMLHttpRequest();
+		ourRequest.open('GET', '/assessment/topics');
+		ourRequest.onload = function() {
+			var topicsData = JSON.parse(ourRequest.responseText);
+			createDropDown(topicsData, "Topics", 0);
+		}
+		ourRequest.send();
+	}
 
 })
 
@@ -37,6 +49,8 @@ submitChoiceButton.addEventListener("click", function() {
 		ourRequest.send();
 		sumbitCounter++;
 	} else if (sumbitCounter == 1) {
+
+
 		var value = document.getElementById("Quizzesss").value;
 		console.log(value);
 		while(quizContainer.firstChild){
@@ -51,12 +65,22 @@ submitChoiceButton.addEventListener("click", function() {
 			console.log(ourData);
 			
 			renderInput(ourData, counter);
+
+			var ourPost = new XMLHttpRequest();
+			ourPost.open('POST', '/assessment/setcurrentquestion?questionID=' + ourData[counter].questionID);
+			ourPost.send();
 		
 		};
 		ourRequest.send();
+
+
 		nextButton.classList.remove("hide-me");
 		sumbitCounter++;
+
+
 	} else {
+
+		
 
 		if(ourData[counter].type == "M") {
 			var radios = document.getElementsByName(ourData[counter].questionID);
@@ -102,6 +126,8 @@ submitChoiceButton.addEventListener("click", function() {
 
 
 nextButton.addEventListener("click", function() {
+	
+
 	while(quizContainer.firstChild){
 		quizContainer.removeChild(quizContainer.firstChild);
 	}
@@ -114,10 +140,15 @@ nextButton.addEventListener("click", function() {
 	}
 	
 	renderInput(ourData, counter);
+	var ourRequest = new XMLHttpRequest();
+	ourRequest.open('POST', '/assessment/setcurrentquestion?questionID=' + ourData[counter].questionID);
+	ourRequest.send();
 
 });
 
 previousButton.addEventListener("click", function() {
+	
+
 	while(quizContainer.firstChild){
 		quizContainer.removeChild(quizContainer.firstChild);
 	}
@@ -130,6 +161,9 @@ previousButton.addEventListener("click", function() {
 
 	
 	renderInput(ourData, counter);
+	var ourRequest = new XMLHttpRequest();
+	ourRequest.open('POST', '/assessment/setcurrentquestion?questionID=' + ourData[counter].questionID);
+	ourRequest.send();
 })
 
 

@@ -96,9 +96,9 @@ router.post("/setcurrentquestion", function (req, res, next) {
 });
 
 router.get("/getcurrentquestion", function (req, res, next) {
-    var sql = "SELECT questionID FROM Sessions WHERE sessionID = ?";
+    var sql = "SELECT currentQuestionID FROM Sessions WHERE sessionID = ?";
     db.get(sql, [req.session.id], function (err, row) {
-        res.send(row.questionID);
+        res.send(row.currentQuestionID);
     });
 });
 
