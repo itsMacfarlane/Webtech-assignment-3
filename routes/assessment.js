@@ -62,7 +62,10 @@ router.get("/check", function (req, res, next) {
                     false,
                 ]);
             }
-            res.send("Incorrect");
+            sql3 = "SELECT correctAnswer FROM Questions where questionID = ?";
+            db.get(sql3, [req.query.questionID], function (err, row) {
+                res.send(row);
+            });
         } else {
             if (req.session.userID) {
                 db.run(sql2, [
@@ -78,12 +81,12 @@ router.get("/check", function (req, res, next) {
     });
 });
 
-router.get("/getanswer", function (req, res, next) {
-    sql = "SELECT correctAnswer FROM Questions where questionID = ?";
-    db.get(sql, [req.query.questionID], function (err, row) {
-        res.send(row);
-    });
-});
+// router.get("/getanswer", function (req, res, next) {
+//     sql = "SELECT correctAnswer FROM Questions where questionID = ?";
+//     db.get(sql, [req.query.questionID], function (err, row) {
+//         res.send(row);
+//     });
+// });
 
 router.get("/sessionsucces", function (req, res, next) {
     var sql = "SELECT correct FROM Scores WHERE sessionID = ?";
