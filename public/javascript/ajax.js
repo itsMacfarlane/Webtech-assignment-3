@@ -3,29 +3,20 @@ var quizContainer = document.getElementById("quizzes");
 var counter = 0;
 var ourData = "";
 var sumbitCounter = 0;
-
+var getcurrentquestion = "";
 
 
 window.addEventListener("load", function() {
 
 
-	var currentQuestion = new XMLHttpRequest();
-	currentQuestion.open('GET', '/assessment/getcurrentquestion');
-	currentQuestion.onload = function() {
-		var getcurrentquestion = JSON.parse(currentQuestion.responseText);
-		console.log(getcurrentquestion.currentQuestionID);
+	var ourRequest = new XMLHttpRequest();
+	ourRequest.open('GET', '/assessment/topics');
+	ourRequest.onload = function() {
+		var topicsData = JSON.parse(ourRequest.responseText);
+		createDropDown(topicsData, "Topics", 0);
 	}
-	currentQuestion.send();
+	ourRequest.send();
 
-	if(getcurrentquestion.currentQuestionID == null) {
-		var ourRequest = new XMLHttpRequest();
-		ourRequest.open('GET', '/assessment/topics');
-		ourRequest.onload = function() {
-			var topicsData = JSON.parse(ourRequest.responseText);
-			createDropDown(topicsData, "Topics", 0);
-		}
-		ourRequest.send();
-	}
 
 })
 
