@@ -95,6 +95,12 @@ router.post("/setcurrentquestion", function (req, res, next) {
     db.run(sql, [req.query.questionID, req.session.id]);
 });
 
+router.get("/getcurrentquestion", function (req, res, next){
+    var sql = "SELECT questionID FROM Sessions WHERE sessionID = ?";
+    db.get(sql, [req.session.id], function (err, row){
+        res.send(row.questionID);
+    })
+
 router.get("/report", function (req, res, next) {
     var sql = "SELECT correct FROM Scores WHERE sessionID = ?";
     var sessionCorrect = 0;
