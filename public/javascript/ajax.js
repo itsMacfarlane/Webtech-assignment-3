@@ -80,6 +80,8 @@ submitChoiceButton.addEventListener("click", function() {
 				console.log("Congratz!");
 				var field = document.getElementById("fieldset-" + ourData[counter].questionID);
            		field.style.backgroundColor = "lightgreen";
+			} else if (checkAnswer == "Login") {
+				window.alert("You need to be logged in before you can submit your answers");
 			} else {
 				console.log("Wrong, the right answer is " + checkAnswer);
 				var field = document.getElementById("fieldset-" + ourData[counter].questionID);
