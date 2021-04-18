@@ -102,6 +102,13 @@ router.get("/getcurrentquestion", function (req, res, next) {
     });
 });
 
+router.get("/getquizid", function (req, res, next) {
+    var sql = "SELECT quizID FROM Questions WHERE questionID = ?";
+    db.get(sql, [req.query.questionID], function (err, row) {
+        res.send(row.quizID);
+    });
+});
+
 router.get("/report", function (req, res, next) {
     var sql = "SELECT correct FROM Scores WHERE sessionID = ?";
     var sessionCorrect = 0;
