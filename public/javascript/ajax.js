@@ -9,13 +9,13 @@ var getcurrentquestion = "";
 window.addEventListener("load", function() {
 
 
-	var ourRequest = new XMLHttpRequest();
-	ourRequest.open('GET', '/assessment/topics');
-	ourRequest.onload = function() {
-		var topicsData = JSON.parse(ourRequest.responseText);
-		createDropDown(topicsData, "Topics", 0);
-	}
-	ourRequest.send();
+		var ourRequest = new XMLHttpRequest();
+		ourRequest.open('GET', '/assessment/topics');
+		ourRequest.onload = function() {
+			var topicsData = JSON.parse(ourRequest.responseText);
+			createDropDown(topicsData, "Topics", 0);
+		}
+		ourRequest.send();
 
 
 })
